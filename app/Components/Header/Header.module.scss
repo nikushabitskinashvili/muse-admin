@@ -1,0 +1,17 @@
+.main {
+    background: linear-gradient(90deg, #CD2461 0%, #3850CA 100%);
+    width: 100%;
+}
+
+.mainWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 40px;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
