@@ -23,12 +23,13 @@ const AsideItem = (props: Props) => {
     };
 
     return (
-        <li
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
+       
+           
+        
             <Link href={props.pathname}
-                className={`${styles.defaultLink} ${props.active ? styles.active : ''}`}>
+                className={`${styles.defaultLink} ${props.active ? styles.active : ''}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}>
                 <Image
                     src={getImageSrc()}
                     alt={props.title}
@@ -38,7 +39,7 @@ const AsideItem = (props: Props) => {
                 />
                 {props.title}
             </Link>
-        </li>
+       
     );
 };
 
