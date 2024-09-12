@@ -1,0 +1,25 @@
+@import 'app/styles/colors.scss';
+.defaultLink {
+    color: $textWhite;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+  
+}
+
+
+
+.defaultLink:hover{
+    color: $primaryCyan;
+}
+
+.active {
+    color: $primaryCyan;
+}

@@ -2,7 +2,8 @@ import SearchInput from "./SearchInput/SearchInput";
 import styles from "./Header.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { IconEnum } from "../icons/icons";
+import { IconEnum } from "@/app/utlis/icons/icons";
+
 
 
 

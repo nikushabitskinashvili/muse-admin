@@ -3,6 +3,7 @@
 import styles from "./SearchInput.module.scss";
 import React, { useState } from 'react';
 import Image from "next/image";
+import { IconEnum } from "@/app/utlis/icons/icons";
 
 const SearchInput: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>('');
@@ -22,7 +23,7 @@ const SearchInput: React.FC = () => {
     return (
         <div className={styles.wrapper}>
             <div className={inputValue ? styles.inputTyping : styles.container}>
-                <Image src={'/images/search.png'} alt="search" className={styles.searchIcon} width={15} height={15} />
+                <Image src={IconEnum.SEARCH} alt="search" className={styles.searchIcon} width={15} height={15} />
                 <input
                     type="text"
                     placeholder="Search"

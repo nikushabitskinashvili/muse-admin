@@ -1,5 +1,7 @@
+@import 'app/styles/colors.scss';
+
 .main {
-    background: linear-gradient(90deg, #CD2461 0%, #3850CA 100%);
+    background:$primaryBackground;
     width: 100%;
 }
 
