@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Inter } from "next/font/google";
 import Header from "./Components/Header/Header";
+import Aside from "./Components/Aside/Aside";
+
+
+const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "muse-admin",
@@ -14,8 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Header/>
+      <body className={inter.className}>
+        <Header />
+        <Aside/>
         {children}
       </body>
     </html>
