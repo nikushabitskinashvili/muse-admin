@@ -1,0 +1,48 @@
+@import "/app/styles/colors.scss";
+
+.cardImage {
+  border-radius: 10px;
+  width: 128px;
+  height: 126px;
+}
+
+.title {
+  color: $textWhite;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 500;
+}
+
+.artistCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $secondaryLightBlack;
+  padding: 24px;
+  gap: 12px;
+  border-radius: 12px;
+}
+
+@media (max-width: 767px) {
+
+  .title{
+    font-size: 14px;
+    max-width: 64px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cardImage {
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+  }
+
+  .artistCardContainer {
+    gap: 4px;
+    width: 74px;
+    height: 78px;
+    padding: 10px 5px;
+  }
+}
