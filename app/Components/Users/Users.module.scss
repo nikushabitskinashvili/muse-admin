@@ -14,6 +14,7 @@
 .tableWrapper :global .ant-table-thead >tr >th {
     background: #2B2B2B !important;
     border:none;
+   
 }
 
 .tableWrapper :global .ant-table-tbody >tr >th {
@@ -26,12 +27,13 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    padding: 40px 16px 12px;
 }
-
 
 .tableWrapper :global .ant-table-content {
     border-radius: 10px;
 }
+
 
 .table{
     width: 100%;

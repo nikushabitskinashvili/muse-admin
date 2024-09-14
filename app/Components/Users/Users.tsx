@@ -4,6 +4,11 @@ import { Table } from "antd";
 import styles from "./Users.module.scss";
 
 export const Users = () => {
+
+const block= ( ) => {
+    console.log('blocked')
+}
+
     const dataSource = [
         {
             key: "1",
@@ -114,6 +119,7 @@ export const Users = () => {
                         alt="block Icon"
                         width={24}
                         height={24}
+                        onClick={block}
                     />
                 </div>
             )},
@@ -122,7 +128,7 @@ export const Users = () => {
     return (
         <div className={styles.table}>
             <div className={styles.tableWrapper}>
-                <Table dataSource={dataSource} columns={columns} pagination={false} />
+                <Table dataSource={dataSource} columns={columns} pagination={false}  />
             </div>
         </div>
 
