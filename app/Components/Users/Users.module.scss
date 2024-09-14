@@ -1,0 +1,41 @@
+.tableWrapper :global .ant-table-cell {
+    background:#050505 !important;
+    color: white !important;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.tableWrapper :global .ant-table-cell::before {
+    display: none;
+}
+
+.tableWrapper :global .ant-table-thead >tr >th {
+    background: #2B2B2B !important;
+    border:none;
+   
+}
+
+.tableWrapper :global .ant-table-tbody >tr >th {
+    border-bottom: 1px solid #9A9A9A !important;
+}
+
+.tableWrapper :global .ant-table-tbody .ant-table-cell{
+    color: #FFF !important;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 40px 16px 12px;
+}
+
+.tableWrapper :global .ant-table-content {
+    border-radius: 10px;
+}
+
+
+.table{
+    width: 100%;
+    background:#050505 !important;
+}

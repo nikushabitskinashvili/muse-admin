@@ -7,7 +7,7 @@ export const ArtistCard = ({title, item}: { title: string; item: any }) => {
     return (
         <Link className={styles.artistCardContainer} href={`artists/${item.id}`}>
             <Image
-                src={item.img}
+                src={item.src}
                 width={130}
                 height={126}
                 alt={item.title}
