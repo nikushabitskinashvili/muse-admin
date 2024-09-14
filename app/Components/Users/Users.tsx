@@ -5,9 +5,7 @@ import styles from "./Users.module.scss";
 
 export const Users = () => {
 
-const block= ( ) => {
-    console.log('blocked')
-}
+
 
     const dataSource = [
         {
@@ -119,7 +117,6 @@ const block= ( ) => {
                         alt="block Icon"
                         width={24}
                         height={24}
-                        onClick={block}
                     />
                 </div>
             )},
