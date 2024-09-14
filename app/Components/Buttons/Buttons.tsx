@@ -1,5 +1,5 @@
 "use client"
-import styles from './Button.module.scss'
+import styles from "./Buttons.module.scss";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { IconEnum } from '@/app/utlis/icons/icons';
