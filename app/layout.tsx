@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Header from "./Components/Header/Header";
 import Aside from "./Components/Aside/Aside";
 import styles from "./layout.module.css";
+import RecoilWrapper from "./Components/RecoilWrapper/RecoilWrapper";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,18 +21,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <div className={styles.wrapper}>
-          <Aside />
+    // <html lang="en">
+    //   <body className={inter.className}>
+    //     <Header />
+    //     <div className={styles.wrapper}>
+    //       <Aside />
 
-          {children}
-        </div>
+    //       {children}
+    //     </div>
+    // </body>
+    // </html>
 
-
-
-      </body>
-    </html>
+    
+      <html lang="en">
+          <body className={inter.className}>
+              <RecoilWrapper>
+                  {children}
+              </RecoilWrapper>
+          </body>
+      </html>
+  
   );
 }
