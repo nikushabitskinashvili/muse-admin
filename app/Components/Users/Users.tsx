@@ -1,70 +1,79 @@
-"use client";
-import Image from "next/image";
-import { Table } from "antd";
-import styles from "./Users.module.scss";
+"use client"
+import { useState } from 'react';
+import Image from 'next/image';
+import { Table } from 'antd';
+import styles from './Users.module.scss';
+import ReusableModal from '../ReusableModal/ReusableModal';
 
-export const Users = () => {
+const Users = () => {
+    const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
 
+    const openChangePasswordModal = () => setIsChangePasswordModalOpen(true);
+    const closeChangePasswordModal = () => setIsChangePasswordModalOpen(false);
 
+    const handleChangePasswordSubmit = (formData: FormData) => {
+
+        closeChangePasswordModal();
+    };
 
     const dataSource = [
         {
             key: "1",
-            title: "eere",
+            title: "eewhdwdhdwjdwwhre",
             password: "fdsswwedfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "2",
-            title: "eere",
+            title: "eejeednfdejeejre",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "3",
-            title: "eere",
+            title: "eeejerjerefjrre",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "4",
-            title: "eere",
+            title: "eeruerejedjerre",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "5",
-            title: "eere",
+            title: "ererejefdnjere",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "6",
-            title: "eere",
+            title: "erfrejnfrmrere",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "7",
-            title: "eere",
+            title: "eerfjrfrjrfrjre",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "8",
-            title: "eere",
+            title: "eefjrfrnfrjrjre",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "9",
-            title: "eere",
+            title: "eefjfgnggjrrjrtjre",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
         {
             key: "10",
-            title: "eere",
+            title: "edhfhfsjdsdjere",
             password: "fdssdfshdsh",
             edit: "10 Downing Street",
         },
@@ -104,6 +113,7 @@ export const Users = () => {
                         alt="edit Icon"
                         width={24}
                         height={24}
+                        onClick={openChangePasswordModal}
                     />
 
                     <Image
@@ -119,16 +129,26 @@ export const Users = () => {
                         height={24}
                     />
                 </div>
-            )},
-        ]
+            )
+        },
+    ]
+
 
     return (
-        <div className={styles.table}>
-            <div className={styles.tableWrapper}>
-                <Table dataSource={dataSource} columns={columns} pagination={false}  />
+        <>
+            <div className={styles.table}>
+                <div className={styles.tableWrapper}>
+                    <Table dataSource={dataSource} columns={columns} pagination={false} />
+                </div>
             </div>
-        </div>
-
+            <ReusableModal
+                isOpen={isChangePasswordModalOpen}
+                onClose={closeChangePasswordModal}
+                onSubmit={handleChangePasswordSubmit} 
+                 buttonTitle={'Edit Password'}      >
+                <input type="password" name="newPassword" placeholder="Enter new password" />
+            </ReusableModal>
+        </>
     );
 };
 

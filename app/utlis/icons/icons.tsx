@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import { colorsEnum } from "../../styles/colors";
+import { colorsEnum } from "../colors/colors.enum";
 
 export enum IconEnum {
   LOGOUT = "/icons/logOut.svg",
@@ -8,7 +8,9 @@ export enum IconEnum {
   ARTIST = "/icons/artist.svg",
   BLUEUSER = "/icons/blueUser.svg",
   BLUEARTIST = "/icons/blueArtis.svg",
-  SEARCH = "/icons/search.svg"
+  SEARCH = "/icons/search.svg",
+  CLOSE = "/icons/close.svg",
+  FILEUPLOAD = "/icons/fileUpload.svg"
 }
 
 interface Props {

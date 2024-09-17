@@ -1,0 +1,69 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.modal {
+  border-radius: 24px;
+  background: #2A2A2A;
+  padding: 40px;
+}
+
+.submitButton {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.formWrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.btn button {
+  float: right;
+}
+
+.modalFormWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.fileInputWrapper img {
+  border-radius: 24px;
+}
+
+.text {
+  color: #FFF;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.modalForm{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.inputFile {
+  display: none;
+}
+
+.modalFormTxt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

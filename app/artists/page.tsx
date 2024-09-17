@@ -1,40 +1,90 @@
-import { HMR_ACTIONS_SENT_TO_BROWSER } from "next/dist/server/dev/hot-reloader-types";
-import { ArtistCard } from "../Components/ArtistCard/ArtistCard";
+"use client"
+import { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "./page.module.scss";
+import { Button } from "../Components/Buttons/Buttons";
+import ReusableModal from "../Components/ReusableModal/ReusableModal";
+import { ArtistCard } from "../Components/ArtistCard/ArtistCard";
+import AddArtistsModule from "../Components/modals/AddArtistsModal";
+import { FieldValues, FormProvider } from "react-hook-form";
 
 interface Artist {
-    id: string;
-    title: string;
-    src: string
+  id: string;
+  title: string;
+  src: string;
 }
 
-const artists: Artist[] = [
-    { id: "1", title: "Artist One", src: "/images/artist.png" },
-    { id: "2", title: "Artist Two", src: "/images/artist.png" },
-    { id: "3", title: "Artist Three", src: "/images/artist.png" },
-    { id: "4", title: "Artist Three", src: "/images/artist.png" },
-    { id: "5", title: "Artist Three", src: "/images/artist.png" },
-    { id: "6", title: "Artist Three", src: "/images/artist.png" },
-    { id: "7", title: "Artist Three", src: "/images/artist.png" },
-    { id: "8", title: "Artist Three", src: "/images/artist.png" },
-    { id: "9", title: "Artist Three", src: "/images/artist.png" },
-    { id: "10", title: "Artist Three", src: "/images/artist.png" },
-];
+const ArtistPage = () => {
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [isAddArtistModalOpen, setIsAddArtistModalOpen] = useState(false);
 
-export default function Artist() {
-    return (
-        <main className={styles.main}>
-            <div className={styles.container}>
-                <div className={styles.containerWrapper}>
-                    <span className={styles.title}>Artists</span>
-                    
-                </div>
-                <div className={styles.wrapper}>
-                    {artists.map((item) => (
-                        <ArtistCard key={item.id} title={item.title} item={item} />
-                    ))}
-                </div>
-            </div>
-        </main>
-    );
-}
+  useEffect(() => {
+    const fetchArtists = async () => {
+      try {
+        const response = await axios.get("https://back.museappofficial.com/artist");
+        setArtists(response.data);
+      } catch (error) {
+        console.error("Error fetching artists:", error);
+      }
+    };
+
+    fetchArtists();
+  }, []);
+
+  const openAddArtistModal = () => setIsAddArtistModalOpen(true);
+  const closeAddArtistModal = () => setIsAddArtistModalOpen(false);
+
+  const handleAddArtistSubmit = async (data: FieldValues) => {
+    try {
+      alert('asdasdsad')
+      const formData = new FormData();
+      formData.append('name', 'asdadsad')
+      formData.append("biography", 'adadsdsdsada')
+      formData.append("image", 'jsdhadaiadiaida')
+      formData.append("cover", 'adadsada')
+     
+
+      console.log('Form data', formData.entries())
+      const response = await axios.post("https://back.museappofficial.com/artist", formData, {
+        headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNjU4NDUxMH0.erAZIQomDcos2GwPrmO9eOqx0mJQGk7NhWDFBSSRUnc' },
+      }
+      );
+
+      closeAddArtistModal();
+      setArtists([...artists, response.data]);
+    } catch (error) {
+      console.error("Error adding artist:", error);
+    }
+  };
+
+  return (
+    <div className={styles.main}>
+      <div className={styles.container}>
+        <div className={styles.containerWrapper}>
+          <span className={styles.title}>The Artists</span>
+          <Button title="Add New Artist +" onClick={openAddArtistModal} bg="pink" />
+        </div>
+
+        <div className={styles.wrapper}>
+          {artists.length > 0 ? (
+            artists.map((item) => (
+              <ArtistCard key={item.id} title={item.title} item={item} />
+            ))
+          ) : (
+            <p>No artists available</p>
+          )}
+        </div>
+
+        <ReusableModal
+          isOpen={isAddArtistModalOpen}
+          onClose={closeAddArtistModal}
+          onSubmit={handleAddArtistSubmit}
+          buttonTitle={"Add Artist"}>
+          <AddArtistsModule />
+        </ReusableModal>
+      </div>
+    </div>
+  );
+};
+
+export default ArtistPage;

@@ -1,8 +1,10 @@
-import { Button } from "./Components/Buttons/Buttons";
+
+import Users from "./Components/Users/Users";
 
 export default function Home() {
   return (
     <>
+    <Users></Users>
     </>
   );
 }

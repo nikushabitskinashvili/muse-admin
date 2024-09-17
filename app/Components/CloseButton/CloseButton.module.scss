@@ -1,0 +1,29 @@
+.x {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    padding: 4px;
+    border: 1px solid #747474;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    background: #747474;
+    justify-content: center;
+    cursor: pointer;
+  
+    &:hover {
+      background: #B7B7B7;
+      border: 1px solid #B7B7B7;
+    }
+  
+    &:active {
+      background: #545454;
+      border: 1px solid #545454;
+    }
+  }
+  
+  .bgNone{
+    background: inherit;
+    border: none;
+  }
+  
