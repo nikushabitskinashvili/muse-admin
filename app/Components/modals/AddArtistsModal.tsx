@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 const AddArtistsModule: React.FC = () => {
-  const { register } = useFormContext(); 
+  const { register , control} = useFormContext(); 
 
   return (
     <div>
@@ -17,7 +17,7 @@ const AddArtistsModule: React.FC = () => {
       />
       <input
         type="file"
-        {...register('image')}
+        {...register('file')}
       />
     </div>
   );

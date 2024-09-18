@@ -36,17 +36,17 @@ const ArtistPage = () => {
 
   const handleAddArtistSubmit = async (data: FieldValues) => {
     try {
-      alert('asdasdsad')
+      console.log(data);
       const formData = new FormData();
-      formData.append('name', 'asdadsad')
-      formData.append("biography", 'adadsdsdsada')
-      formData.append("image", 'jsdhadaiadiaida')
-      formData.append("cover", 'adadsada')
-     
+      formData.append('name', data.name)
+      formData.append("biography", data.biography)
+      formData.append("image", data.file[0])
+      formData.append("cover", data.file[0])
 
-      console.log('Form data', formData.entries())
       const response = await axios.post("https://back.museappofficial.com/artist", formData, {
-        headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNjU4NDUxMH0.erAZIQomDcos2GwPrmO9eOqx0mJQGk7NhWDFBSSRUnc' },
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
       }
       );
 

@@ -4,7 +4,6 @@ import { useForm, FormProvider, SubmitHandler, FieldValues } from 'react-hook-fo
 import styles from './ReusableModal.module.scss';
 import { Button } from '../Buttons/Buttons';
 import CloseButton from '../CloseButton/CloseButton';
-import axios from 'axios';
 
 interface ReusableModalProps {
   isOpen: boolean;
