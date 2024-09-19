@@ -8,7 +8,8 @@ export enum IconEnum {
   ARTIST = "/icons/artist.svg",
   BLUEUSER = "/icons/blueUser.svg",
   BLUEARTIST = "/icons/blueArtis.svg",
-  SEARCH = "/icons/search.svg"
+  SEARCH = "/icons/search.svg",
+  BIN = "/icons/bin.svg"
 }
 
 interface Props {
