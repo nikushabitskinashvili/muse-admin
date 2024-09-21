@@ -47,6 +47,12 @@ export const Button = (props: Props) => {
 
     if (props.bg === 'blue') classes.push(styles.blue)
     else if (props.bg === 'pink') classes.push(styles.pink)
+    else classes.push(styles.none)
+
+
+    const showTitle = () => {
+        return !(props.title == 'Add New Artist' && isSmallScreen)
+    }
 
 
     return (
@@ -57,6 +63,7 @@ export const Button = (props: Props) => {
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
         >
+            {showTitle() && <span className={styles.title}>{props.title}</span>}
             {currentIcon && <Image className={styles.icon} src={IconEnum[currentIcon]} alt={''} width={24} height={24} />}</button>
     )
 }
