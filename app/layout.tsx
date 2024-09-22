@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Header from "./Components/Header/Header";
-import Aside from "./Components/Aside/Aside";
-import styles from "./layout.module.css";
+import RecoilWrapper from "./Components/RecoilWrapper/RecoilWrapper";
+import NewArtistModal from "./Components/NewartistModal/NewArtistModal";
+import EditPasswordModal from "./Components/EditPasswordModal/EditPasswordModal";
+import BlockAccount from "./Components/BlockAccount/BlockAccount";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,18 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <div className={styles.wrapper}>
-          <Aside />
-
+        <RecoilWrapper>
           {children}
-        </div>
-
-
-
+        </RecoilWrapper>
       </body>
     </html>
+
   );
 }

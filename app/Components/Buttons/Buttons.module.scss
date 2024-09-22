@@ -18,6 +18,22 @@
   cursor: pointer;
 }
 
+.none {
+  background: none;
+  color: #FFF;
+  border: 1px solid #FFF;
+
+  &:hover {
+    color: #000000;
+    background: #FFF;
+  }
+
+  &:active {
+    color: #FFF;
+    background: inherit;
+  }
+}
+
 
 .big {
   max-width: 427px;

@@ -1,9 +1,10 @@
 "use client"
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ArtistCard } from "@/app/Components/ArtistCard/ArtistCard";
 import styles from "./page.module.scss";
-import { Button } from "../Components/Buttons/Buttons";
-import { ArtistCard } from "../Components/ArtistCard/ArtistCard";
+import { Button } from "@/app/Components/Buttons/Buttons";
+
 
 
 
@@ -12,6 +13,7 @@ interface Artist {
   title: string;
   src: string;
 }
+
 
 const ArtistPage = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
