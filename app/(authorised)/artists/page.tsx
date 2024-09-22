@@ -1,5 +1,4 @@
-import { HMR_ACTIONS_SENT_TO_BROWSER } from "next/dist/server/dev/hot-reloader-types";
-import { ArtistCard } from "../Components/ArtistCard/ArtistCard";
+import { ArtistCard } from "@/app/Components/ArtistCard/ArtistCard";
 import styles from "./page.module.scss";
 
 interface Artist {
@@ -8,7 +7,7 @@ interface Artist {
     src: string
 }
 
-const artists: Artist[] = [
+const artist: Artist[] = [
     { id: "1", title: "Artist One", src: "/images/artist.png" },
     { id: "2", title: "Artist Two", src: "/images/artist.png" },
     { id: "3", title: "Artist Three", src: "/images/artist.png" },
@@ -21,16 +20,16 @@ const artists: Artist[] = [
     { id: "10", title: "Artist Three", src: "/images/artist.png" },
 ];
 
-export default function Artist() {
+export default function artists() {
     return (
         <main className={styles.main}>
             <div className={styles.container}>
                 <div className={styles.containerWrapper}>
                     <span className={styles.title}>Artists</span>
-                    
+
                 </div>
                 <div className={styles.wrapper}>
-                    {artists.map((item) => (
+                    {artist.map((item) => (
                         <ArtistCard key={item.id} title={item.title} item={item} />
                     ))}
                 </div>
@@ -38,3 +37,5 @@ export default function Artist() {
         </main>
     );
 }
+
+
