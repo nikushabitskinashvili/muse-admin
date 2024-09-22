@@ -11,7 +11,8 @@ export enum IconEnum {
   BLUEARTIST = "/icons/blueArtis.svg",
   SEARCH = "/icons/search.svg",
   CLOSE = "/icons/close.svg",
-  FILEUPLOAD = "/icons/fileUpload.svg"
+  FILEUPLOAD = "/icons/fileUpload.svg",
+  BIN = "/icons/bin.svg"
 }
 
 interface Props {
