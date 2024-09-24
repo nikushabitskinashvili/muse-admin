@@ -48,12 +48,6 @@ export const Button = (props: Props) => {
     if (props.bg === 'blue') classes.push(styles.blue)
     else if (props.bg === 'pink') classes.push(styles.pink)
     else classes.push(styles.none)
-
-
-    const showTitle = () => {
-        return !(props.title == 'Add New Artist' && isSmallScreen)
-    }
-
     const showTitle = () => {
         return !(props.title == '' && isSmallScreen)
     }

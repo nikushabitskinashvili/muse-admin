@@ -1,21 +1,33 @@
-"use client"
-import { useState } from 'react';
-import Image from 'next/image';
-import { Table } from 'antd';
-import styles from './Users.module.scss';
-import ReusableModal from '../ReusableModal/ReusableModal';
+"use client";
+import { useRef, useState } from "react";
+import Image from "next/image";
+import { Table } from "antd";
+import EditPasswordModal from "@/app/Components/EditPasswordModal/EditPasswordModal";
+import styles from "./Users.module.scss";
+import { Props } from "@/app/interface/props.interface";
 
-const Users = () => {
+const Users = (props: Props) => {
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<string | null>(null);
+    const [addPop, setAddPop] = useState(false);
+    const addPopRef = useRef<HTMLDivElement>(null);
 
-    const openChangePasswordModal = () => setIsChangePasswordModalOpen(true);
-    const closeChangePasswordModal = () => setIsChangePasswordModalOpen(false);
-
-    const handleChangePasswordSubmit = (formData: FormData) => {
-
-        closeChangePasswordModal();
+    const openChangePasswordModal = (user: string) => {
+        setSelectedUser(user);
+        setIsChangePasswordModalOpen(true);
     };
 
+    const toggleAddPop = () => {
+        setAddPop(!addPop);
+    };
+
+    const clickOnPop = (event: React.MouseEvent) => {
+        event.stopPropagation();
+    };
+
+    const closeAddPop = () => {
+        setAddPop(false);
+    };
     const dataSource = [
         {
             key: "1",
@@ -94,34 +106,32 @@ const Users = () => {
             title: "Edit",
             dataIndex: "edit",
             key: "edit",
-            render: () => (
-                <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                }}>
-
-
-
+            render: (_: any, record: any) => (
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                    }}
+                >
                     <Image
                         style={{
                             borderRadius: "4px",
                             background: "#747474",
-                            cursor: "pointer"
+                            cursor: "pointer",
                         }}
                         src="/icons/edit.svg"
                         alt="edit Icon"
                         width={24}
                         height={24}
-                        onClick={openChangePasswordModal}
+                        onClick={() => openChangePasswordModal(record.title)}
                     />
 
                     <Image
-
                         style={{
                             borderRadius: "4px",
                             background: "#E82567",
-                            cursor: "pointer"
+                            cursor: "pointer",
                         }}
                         src="/icons/block.svg"
                         alt="block Icon"
@@ -129,10 +139,9 @@ const Users = () => {
                         height={24}
                     />
                 </div>
-            )
+            ),
         },
-    ]
-
+    ];
 
     return (
         <>
@@ -141,13 +150,23 @@ const Users = () => {
                     <Table dataSource={dataSource} columns={columns} pagination={false} />
                 </div>
             </div>
-            <ReusableModal
-                isOpen={isChangePasswordModalOpen}
-                onClose={closeChangePasswordModal}
-                onSubmit={handleChangePasswordSubmit} 
-                 buttonTitle={'Edit Password'}      >
-                <input type="password" name="newPassword" placeholder="Enter new password" />
-            </ReusableModal>
+
+            {isChangePasswordModalOpen && (
+
+                <div className={styles.popBackground} onClick={closeAddPop}>
+                    <div
+                        ref={addPopRef}
+                        onClick={clickOnPop}
+                        className={styles.popContainer}
+                    >
+                        <EditPasswordModal
+                            title="Edit Password"
+                            onClose={closeAddPop}
+                        />
+                    </div>
+                </div>
+            )}
+
         </>
     );
 };

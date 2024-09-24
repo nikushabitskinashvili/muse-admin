@@ -1,13 +1,13 @@
-"use client"
-import { Props } from '@/app/interface/props.interface';
-import { Button } from '../Buttons/Buttons';
-import CloseButton from '../CloseButton/CloseButton';
-import styles from './EditPasswordModal.module.scss';
-import { useState } from 'react';
-import axios from 'axios';
+"use client";
+import { Props } from "@/app/interface/props.interface"; // Make sure Props has onClose
+import { Button } from "../Buttons/Buttons";
+import CloseButton from "../CloseButton/CloseButton";
+import styles from "./EditPasswordModal.module.scss";
+import { useState } from "react";
+import axios from "axios";
 
-const EditPasswordModal = (props: Props) => {
-    const [newPassword, setNewPassword] = useState<string>('');
+const EditPasswordModal = (onClick: Props) => {
+    const [newPassword, setNewPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -15,23 +15,22 @@ const EditPasswordModal = (props: Props) => {
         setError(null);
 
         try {
-            const response = await axios.post('https://back.museappofficial.com/update-password', {
-                password: newPassword
+            const response = await axios.post("https://back.museappofficial.com/update-password", {
+                password: newPassword,
             });
 
-            console.log('Password updated:', response.data);
-
+            console.log("Password updated:", response.data);
         } catch (err) {
-            console.error('Error updating password:', err);
-            setError('Failed to update password. Please try again.');
+            console.error("Error updating password:", err);
+            setError("Failed to update password. Please try again.");
         }
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.head}>
-                <span className={styles.title}>{props.title}</span>
-                <CloseButton onClick={props.onClose} bg={true} />
+                <span className={styles.title}>{onClick.title}</span>
+                <CloseButton onClick={onClick.onClose} bg={true} />
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.inputCont}>
@@ -47,7 +46,7 @@ const EditPasswordModal = (props: Props) => {
 
                 {error && <p className={styles.error}>{error}</p>}
 
-                <Button bg={'pink'} title="Edit Password" size={'huge'} />
+                <Button bg="pink" title="Edit Password" size="huge" />
             </form>
         </div>
     );
