@@ -2,6 +2,8 @@ import React, { ReactNode } from "react";
 import './layout.module.css';
 import Header from "../Components/Header/Header";
 import Aside from "../Components/Aside/Aside";
+import RecoilWrapper from "../Components/RecoilWrapper/RecoilWrapper";
+import styles from "./layout.module.css";
 
 type Props = {
     children: ReactNode;
@@ -10,9 +12,15 @@ type Props = {
 const AuthLayout = (props: Props) => {
     return (
         <>
-            <Header/>
-            <Aside/>
-            
+
+            <Header />
+            <RecoilWrapper>
+                <div className={styles.container}>
+                    <Aside />
+                    {props.children}
+                </div>
+            </RecoilWrapper>
+
         </>
 
     )

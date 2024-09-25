@@ -19,3 +19,4 @@ export enum colorsEnum {
     CYAN_BUTTON_HOVER = '#00FFFF',
     CYAN_BUTTON_CLICK = '#13ACAC99'
 }
+

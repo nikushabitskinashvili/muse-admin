@@ -7,7 +7,7 @@ import { IconEnum } from '@/app/utlis/icons/icons';
 interface Props {
     bg: string
     title: string
-    type?: string
+    type?: "submit" | "button"
     size?: 'normal' | 'big' | 'huge'
     icon?: keyof typeof IconEnum;
     hoverIcon?: keyof typeof IconEnum;
@@ -48,20 +48,20 @@ export const Button = (props: Props) => {
     if (props.bg === 'blue') classes.push(styles.blue)
     else if (props.bg === 'pink') classes.push(styles.pink)
     else classes.push(styles.none)
-
-
     const showTitle = () => {
-        return !(props.title == 'Add New Artist' && isSmallScreen)
+        return !(props.title == '' && isSmallScreen)
     }
 
 
     return (
         <button
+            type={props.type}
             className={classes.join(' ')}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
+            onClick={props.onClick}
         >
             {showTitle() && <span className={styles.title}>{props.title}</span>}
             {currentIcon && <Image className={styles.icon} src={IconEnum[currentIcon]} alt={''} width={24} height={24} />}</button>

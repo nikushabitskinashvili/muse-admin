@@ -1,9 +1,9 @@
 "use client";
-import styles from "./AlbumCard.module.scss";
+import styles from "./PlaylistCard.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 
-const AlbumCard = ({
+const PlaylistCard = ({
   item,
   className,
 }: {
@@ -15,7 +15,7 @@ const AlbumCard = ({
 
 
     return (
-            <Link className={`${styles.albumCard} ${className}`} href={`albums/${item.id}`}>
+            <Link className={`${styles.albumCard} ${className}`} href={`playlists/${item.id}`}>
                     <Image className={styles.albumImg} src={item.img} alt={item.title} width={150} height={146}/>
                     <div className={styles.albumName}>
                         <span className={styles.albumTitle}>{item.title}</span>
@@ -25,4 +25,4 @@ const AlbumCard = ({
     );
 }
 
-export default AlbumCard;
+export default PlaylistCard;

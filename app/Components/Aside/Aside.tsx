@@ -11,7 +11,10 @@ const Aside = () => {
         { title: "Artists", pathname: "/artists", key: "/artists", src: IconEnum.ARTIST, hoverSrc: IconEnum.BLUEARTIST, activeSrc: IconEnum.BLUEARTIST},
     ];
 
+
     let pathName = usePathname();
+    console.log(pathName);
+    
     return (
         <div className={styles.aside}>
             <div className={styles.asideWrapper}>
