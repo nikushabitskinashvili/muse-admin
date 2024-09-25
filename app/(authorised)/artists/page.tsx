@@ -32,7 +32,7 @@ const ArtistPage = () => {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const response = await axios.get("https://back.museappofficial.com/artist");
+        const response = await axios.get("http://10.10.50.201:3000/artist");
         setArtists(response.data);
       } catch (error) {
         console.error("Error fetching artists:", error);

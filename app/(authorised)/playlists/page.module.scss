@@ -1,0 +1,35 @@
+@import 'app/styles/colors.scss';
+
+.main {
+    width: 100%;
+    background-color: black;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.mainWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin: 0 auto;
+}
+
+.albumTxt span {
+    color: $textWhite;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.albumTxt{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container {
+    display: flex;
+    gap: 32px 24px;
+    flex-wrap: wrap;
+}

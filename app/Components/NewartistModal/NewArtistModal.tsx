@@ -26,18 +26,21 @@ const NewArtistModal = (props: Props) => {
         }
     };
 
-   
+
     const onSubmit = async (values: Modal) => {
+        console.log(values);
+
         const data = new FormData();
         data.append("name", values.name);
         data.append("biography", values.biography);
-        data.append("image", values.image);
-        data.append("cover", values.cover);
+        data.append("image", values.image[0]);
+        data.append("cover", values.image[0]);
 
         try {
-            const response = await axios.post('https://back.museappofficial.com/artist', data, {
+            const response = await axios.post('http://10.10.50.201:3000/artist', data, {
                 headers: {
-                    "Content-Type": 'multipart/form-data'
+                    "Content-Type": 'multipart/form-data',
+                    'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzE5MTAxM30.8cRPkbb0-7OdLaQnWvsSOlxeuiqbnTxJZA9WmquywAo'
                 }
             });
             console.log(response.data);
@@ -66,8 +69,10 @@ const NewArtistModal = (props: Props) => {
                             className={styles.fileInput}
                             type="file"
                             id="image"
-                            {...register('image')}
-                            onChange={handleImageChange}
+                            {...register('image', {
+                                onChange: handleImageChange
+                            })}
+
                         />
                     </label>
 
@@ -93,7 +98,7 @@ const NewArtistModal = (props: Props) => {
                         </div>
                         <Button bg={'pink'} title={"Add Artist"} size={'huge'} />
                     </div>
-                   
+
                 </div>
             </form>
         </div>

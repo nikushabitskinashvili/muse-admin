@@ -2,12 +2,15 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { Table } from "antd";
+import BlockAccount from "@/app/Components/BlockAccount/BlockAccount"; 
 import EditPasswordModal from "@/app/Components/EditPasswordModal/EditPasswordModal";
 import styles from "./Users.module.scss";
 import { Props } from "@/app/interface/props.interface";
+import Link from 'next/link';
 
 const Users = (props: Props) => {
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
+    const [isBlockAccountModalOpen, setIsBlockAccountModalOpen] = useState(false); 
     const [selectedUser, setSelectedUser] = useState<string | null>(null);
     const [addPop, setAddPop] = useState(false);
     const addPopRef = useRef<HTMLDivElement>(null);
@@ -15,6 +18,11 @@ const Users = (props: Props) => {
     const openChangePasswordModal = (user: string) => {
         setSelectedUser(user);
         setIsChangePasswordModalOpen(true);
+    };
+
+    const openBlockAccountModal = (user: string) => {
+        setSelectedUser(user);
+        setIsBlockAccountModalOpen(true); 
     };
 
     const toggleAddPop = () => {
@@ -27,68 +35,77 @@ const Users = (props: Props) => {
 
     const closeAddPop = () => {
         setAddPop(false);
+        setIsBlockAccountModalOpen(false); 
     };
+
     const dataSource = [
         {
             key: "1",
-            title: "eewhdwdhdwjdwwhre",
-            password: "fdsswwedfshdsh",
+            title: "bitskinashvili.nika16@gmail.com",
+            password: "sjajannzkaiausj",
             edit: "10 Downing Street",
         },
         {
             key: "2",
-            title: "eejeednfdejeejre",
-            password: "fdssdfshdsh",
+            title: "chitishvili.gabrieli@gmail.com",
+            password: "sjajjshjanjsi",
             edit: "10 Downing Street",
         },
         {
             key: "3",
-            title: "eeejerjerefjrre",
-            password: "fdssdfshdsh",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
             edit: "10 Downing Street",
         },
         {
             key: "4",
-            title: "eeruerejedjerre",
-            password: "fdssdfshdsh",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
             edit: "10 Downing Street",
         },
         {
             key: "5",
-            title: "ererejefdnjere",
-            password: "fdssdfshdsh",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
             edit: "10 Downing Street",
         },
         {
             key: "6",
-            title: "erfrejnfrmrere",
-            password: "fdssdfshdsh",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
             edit: "10 Downing Street",
         },
         {
             key: "7",
-            title: "eerfjrfrjrfrjre",
-            password: "fdssdfshdsh",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
             edit: "10 Downing Street",
         },
         {
             key: "8",
-            title: "eefjrfrnfrjrjre",
-            password: "fdssdfshdsh",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
             edit: "10 Downing Street",
         },
         {
             key: "9",
-            title: "eefjfgnggjrrjrtjre",
-            password: "fdssdfshdsh",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
             edit: "10 Downing Street",
         },
         {
             key: "10",
-            title: "edhfhfsjdsdjere",
-            password: "fdssdfshdsh",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
+            edit: "10 Downing Street",
+        },{
+            key: "11",
+            title: "boka.kajilashvili@gmail.com",
+            password: "nikssjsjnajajaj",
             edit: "10 Downing Street",
         },
+
+        
     ];
 
     const columns = [
@@ -96,6 +113,9 @@ const Users = (props: Props) => {
             title: "Users",
             dataIndex: "title",
             key: "users",
+            render: (text: string, record: any) => (
+                <Link href={'/playlists/'}>{text}</Link> 
+            ),
         },
         {
             title: "Password",
@@ -107,19 +127,9 @@ const Users = (props: Props) => {
             dataIndex: "edit",
             key: "edit",
             render: (_: any, record: any) => (
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "6px",
-                    }}
-                >
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                     <Image
-                        style={{
-                            borderRadius: "4px",
-                            background: "#747474",
-                            cursor: "pointer",
-                        }}
+                        style={{ borderRadius: "4px", background: "#747474", cursor: "pointer" }}
                         src="/icons/edit.svg"
                         alt="edit Icon"
                         width={24}
@@ -128,15 +138,12 @@ const Users = (props: Props) => {
                     />
 
                     <Image
-                        style={{
-                            borderRadius: "4px",
-                            background: "#E82567",
-                            cursor: "pointer",
-                        }}
+                        style={{ borderRadius: "4px", background: "#E82567", cursor: "pointer" }}
                         src="/icons/block.svg"
                         alt="block Icon"
                         width={24}
                         height={24}
+                        onClick={() => openBlockAccountModal(record.title)} 
                     />
                 </div>
             ),
@@ -152,21 +159,20 @@ const Users = (props: Props) => {
             </div>
 
             {isChangePasswordModalOpen && (
-
                 <div className={styles.popBackground} onClick={closeAddPop}>
-                    <div
-                        ref={addPopRef}
-                        onClick={clickOnPop}
-                        className={styles.popContainer}
-                    >
-                        <EditPasswordModal
-                            title="Edit Password"
-                            onClose={closeAddPop}
-                        />
+                    <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
+                        <EditPasswordModal title="Edit Password" onClose={closeAddPop} />
                     </div>
                 </div>
             )}
 
+            {isBlockAccountModalOpen && (
+                <div className={styles.popBackground} onClick={closeAddPop}>
+                    <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
+                        <BlockAccount /> 
+                    </div>
+                </div>
+            )}
         </>
     );
 };

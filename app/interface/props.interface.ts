@@ -8,7 +8,7 @@ export interface Props {
 
 export interface Modal{
     name:string;
-    cover: string;
-    image: string;
+    cover: any;
+    image: any;
     biography: string;
 }
