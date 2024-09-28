@@ -9,7 +9,11 @@ import axios from 'axios';
 import { IconEnum } from '@/app/utlis/icons/icons';
 import Image from 'next/image';
 
-const NewArtistModal = (props: Props) => {
+interface NewArtistModalProps extends Props {
+    refreshArtists: () => void;
+}
+
+const NewArtistModal = (props: NewArtistModalProps) => {
     const {
         register,
         handleSubmit,
@@ -17,35 +21,44 @@ const NewArtistModal = (props: Props) => {
         formState: { errors },
     } = useForm<Modal>();
 
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [selectedArtistImage, setSelectedArtistImage] = useState<string | null>(null);
+    const [selectedCoverImage, setSelectedCoverImage] = useState<string | null>(null);
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleArtistImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            setSelectedImage(URL.createObjectURL(file));
+            setSelectedArtistImage(URL.createObjectURL(file));
         }
     };
 
+    const handleCoverImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setSelectedCoverImage(URL.createObjectURL(file));
+        }
+    };
 
     const onSubmit = async (values: Modal) => {
-        console.log(values);
-
         const data = new FormData();
         data.append("name", values.name);
         data.append("biography", values.biography);
         data.append("image", values.image[0]);
-        data.append("cover", values.image[0]);
+        data.append("cover", values.cover[0]);
 
+        reset();
+        setSelectedArtistImage(null);
+        setSelectedCoverImage(null);
         try {
-            const response = await axios.post('http://10.10.50.201:3000/artist', data, {
+            await axios.post('https://back.museappofficial.com/artist', data, {
                 headers: {
                     "Content-Type": 'multipart/form-data',
-                    'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzE5MTAxM30.8cRPkbb0-7OdLaQnWvsSOlxeuiqbnTxJZA9WmquywAo'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo'
                 }
             });
-            console.log(response.data);
+            props.refreshArtists(); 
+            props.onClose(); 
         } catch (error) {
-            console.error("Error uploading data:", error);
+            alert('Could not upload artist!');
         }
     };
 
@@ -53,29 +66,48 @@ const NewArtistModal = (props: Props) => {
         <div className={styles.container}>
             <div className={styles.head}>
                 <span className={styles.title}>{props.title}</span>
-                <CloseButton onClick={props.onClose} bg={true} />
+                <CloseButton onClick={props.onClose} bg={true} onClose={props.onClose} />
             </div>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.inputs}>
-                    <label className={styles.img} htmlFor='image'>
-                        <Image
-                            src={selectedImage || IconEnum.FILEUPLOAD}
-                            alt="cover"
-                            width={470}
-                            height={364}
-                            style={{ cursor: 'pointer' }}
-                        />
-                        <input
-                            className={styles.fileInput}
-                            type="file"
-                            id="image"
-                            {...register('image', {
-                                onChange: handleImageChange
-                            })}
-
-                        />
-                    </label>
-
+                    <div className={styles.inputsWrapper}>
+                        <label className={styles.img} htmlFor='image'>
+                            <Image
+                                src={selectedArtistImage || IconEnum.FILEUPLOAD}
+                                alt="image"
+                                width={227}
+                                height={180}
+                                style={{ cursor: 'pointer' }}
+                            />
+                            <input
+                                className={styles.fileInput}
+                                type="file"
+                                id="image"
+                                {...register('image', {
+                                    required: true,
+                                    onChange: handleArtistImageChange
+                                })}
+                            />
+                        </label>
+                        <label htmlFor="cover" className={styles.img}>
+                            <Image
+                                src={selectedCoverImage || IconEnum.COVER}
+                                alt="cover"
+                                width={454}
+                                height={170}
+                                style={{ cursor: 'pointer' }}
+                            />
+                            <input
+                                className={styles.fileInput}
+                                type="file"
+                                id="cover"
+                                {...register('cover', {
+                                    required: true,
+                                    onChange: handleCoverImageChange
+                                })}
+                            />
+                        </label>
+                    </div>
                     <div className={styles.inputsWrapper}>
                         <div className={styles.inp}>
                             <h2 className={styles.text}>Name</h2>
@@ -93,12 +125,13 @@ const NewArtistModal = (props: Props) => {
                             <textarea
                                 className={styles.textarea}
                                 placeholder="Artist Biography"
-                                {...register('biography')}
+                                {...register('biography', {
+                                    required: true,
+                                })}
                             />
                         </div>
                         <Button bg={'pink'} title={"Add Artist"} size={'huge'} />
                     </div>
-
                 </div>
             </form>
         </div>
