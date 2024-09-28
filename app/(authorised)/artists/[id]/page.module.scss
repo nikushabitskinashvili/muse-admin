@@ -1,0 +1,45 @@
+@import "app/styles/colors.scss";
+
+.btns {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.containerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.main {
+    width: 100%;
+    background-color: black;
+    min-height: 100vh;
+    padding: 32px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.title {
+    color: $textWhite;
+    font-size: 24px;
+    font-weight: 500;
+    align-self: stretch;
+}
+
+.btns button{
+    padding: 8px 16px;
+}
+
+.noAlbum{
+    font-size: 50px;
+    color: #FFF;
+    text-align: center;
+  }

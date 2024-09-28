@@ -13,6 +13,7 @@ interface Props {
     hoverIcon?: keyof typeof IconEnum;
     activeIcon?: keyof typeof IconEnum;
     onClick?: () => void;
+    onClickSecond?: (value: boolean) => void;
 }
 
 export const Button = (props: Props) => {

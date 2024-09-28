@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { ArtistCard } from "@/app/Components/ArtistCard/ArtistCard";
 import styles from "./page.module.scss";
 import { Button } from "@/app/Components/Buttons/Buttons";
 import NewArtistModal from "@/app/Components/NewartistModal/NewArtistModal";
+import ArtistCard from "@/app/Components/ArtistCard/ArtistCard";
 
 interface Artist {
   id: string;
@@ -29,16 +29,21 @@ const ArtistPage = () => {
     setAddPop(false);
   };
 
-  useEffect(() => {
-    const fetchArtists = async () => {
-      try {
-        const response = await axios.get("http://10.10.50.201:3000/artist");
-        setArtists(response.data);
-      } catch (error) {
-        console.error("Error fetching artists:", error);
-      }
-    };
+  const fetchArtists = async () => {
+    try {
+      const response = await axios.get("https://back.museappofficial.com/artist", {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo",
+        },
+      });
+      setArtists(response.data);
+    } catch (error) {
+      console.error("Error fetching artists:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchArtists();
   }, []);
 
@@ -53,24 +58,18 @@ const ArtistPage = () => {
         <div className={styles.wrapper}>
           {artists.length > 0 ? (
             artists.map((item) => (
-              <ArtistCard key={item.id} title={item.title} item={item} />
+              <ArtistCard key={item.id} name={item.title} item={item} />
             ))
           ) : (
-            <p>No artists available</p>
+            <p className={styles.noartist}>No artists available</p>
           )}
         </div>
       </div>
 
       {addPop && (
         <div className={styles.popBackground} onClick={closeAddPop}>
-          <div
-            ref={addPopRef}
-            onClick={clickOnPop}
-            className={styles.popContainer}
-          >
-            <NewArtistModal
-              onClose={closeAddPop}
-            />
+          <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
+            <NewArtistModal onClose={closeAddPop} refreshArtists={fetchArtists} />
           </div>
         </div>
       )}

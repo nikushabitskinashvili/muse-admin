@@ -1,12 +1,12 @@
 "use client";
-import { Props } from "@/app/interface/props.interface"; // Make sure Props has onClose
+import { Props } from "@/app/interface/props.interface"; 
 import { Button } from "../Buttons/Buttons";
 import CloseButton from "../CloseButton/CloseButton";
 import styles from "./EditPasswordModal.module.scss";
 import { useState } from "react";
 import axios from "axios";
 
-const EditPasswordModal = (onClick: Props) => {
+const EditPasswordModal = ({title, onClose} : Props) => {
     const [newPassword, setNewPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
 
@@ -29,8 +29,8 @@ const EditPasswordModal = (onClick: Props) => {
     return (
         <div className={styles.container}>
             <div className={styles.head}>
-                <span className={styles.title}>{onClick.title}</span>
-                <CloseButton onClick={onClick.onClose} bg={true} />
+                <span className={styles.title}>{title}</span>
+                <CloseButton onClick={onClose} bg={true} />
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.inputCont}>
