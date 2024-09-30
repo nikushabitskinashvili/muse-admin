@@ -8,7 +8,7 @@ const BlockAccount = (props: Props) => {
     try {
       await axios.patch(
         `https://back.museappofficial.com/user/${props.id}`, 
-        { status: 'blocked' }, 
+        { blocked: true }, 
         {
           headers: {
             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo', 
@@ -17,7 +17,6 @@ const BlockAccount = (props: Props) => {
         }
       );
     } catch (error) {
-      console.error('Error blocking user:', error);
       alert('Could not block user!');
     }
   };

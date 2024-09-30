@@ -35,7 +35,7 @@ const page = () => {
     useEffect(() => {
         const fetchAlbums = async () => {
             try {
-                const response = await axios.get(`https://back.museappofficial.com/artist/${artistId}/albums`, {
+                const response = await axios.get(`https://back.museappofficial.com/artist/${artistId}`, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                         Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo",

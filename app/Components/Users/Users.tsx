@@ -111,7 +111,7 @@ const Users = (props: Props) => {
             {isChangePasswordModalOpen && (
                 <div className={styles.popBackground} onClick={closeAddPop}>
                     <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
-                        <EditPasswordModal title="Edit Password" />
+                        <EditPasswordModal title="Edit Password" onClose={closeAddPop} />
                     </div>
                 </div>
             )}
@@ -119,7 +119,7 @@ const Users = (props: Props) => {
             {isBlockAccountModalOpen && (
                 <div className={styles.popBackground} onClick={closeAddPop}>
                     <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
-                        <BlockAccount />
+                        <BlockAccount onClose={closeAddPop} />
                     </div>
                 </div>
             )}

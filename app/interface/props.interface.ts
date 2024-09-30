@@ -21,7 +21,15 @@ export interface Modal {
 
 export interface albumModal {
     title: string;
-    image: any;
+    album: any;
     releaseDate: number;
     artistId: number;
 }
+
+export interface songModal {
+    title: string;
+    releaseDate: number;
+    music: any;
+    albumId: number;
+}
+
