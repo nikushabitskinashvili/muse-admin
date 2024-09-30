@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import { Button } from "@/app/Components/Buttons/Buttons";
 import styles from "./page.module.scss";
 import AlbumCard from "@/app/Components/AlbumCard/AlbumCard";
-import { useRef, useState } from "react";
-import CloseButton from "@/app/Components/CloseButton/CloseButton";
-import { Props } from "@/app/interface/props.interface";
-import Link from "next/link";
+import { useRef, useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import axios from "axios";
+import NewAlbumModal from "@/app/Components/NewAlbumModal/NewAlbumModal";
 
 interface Album {
     id: string;
@@ -13,16 +13,48 @@ interface Album {
     src: string;
 }
 
-
-const page = (props: Props) => {
+const page = () => {
     const [addPop, setAddPop] = useState(false);
     const addPopRef = useRef<HTMLDivElement>(null);
-    const [Albums, setAlbums] = useState<Album[]>([]);
-
+    const [albums, setAlbums] = useState<Album[]>([]);
+    const params = useParams();
+    const artistId = params.artistId;
 
     const toggleAddPop = () => {
         setAddPop(!addPop);
-    };
+      };
+    
+      const clickOnPop = (event: React.MouseEvent) => {
+        event.stopPropagation();
+      };
+    
+      const closeAddPop = () => {
+        setAddPop(false);
+      };
+
+    useEffect(() => {
+        const fetchAlbums = async () => {
+            try {
+                const response = await axios.get(`https://back.museappofficial.com/artist/${artistId}/albums`, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo",
+                    },
+                });
+                setAlbums(response.data);
+            } catch (error) {
+                console.error("Error fetching albums:", error);
+            }
+        };
+
+        if (artistId) {
+            fetchAlbums();
+        }
+    }, [artistId]);
+
+    function fetchArtists(): void {
+        throw new Error("Function not implemented.");
+    }
 
     return (
         <div className={styles.main}>
@@ -31,15 +63,12 @@ const page = (props: Props) => {
                     <span className={styles.title}>Artist's Albums</span>
                     <div className={styles.btns}>
                         <Button title="Add Album +" bg="pink" onClick={toggleAddPop} />
-                        <Link href={"/"}>
-                            <CloseButton bg={true} />
-                        </Link>
                     </div>
                 </div>
 
                 <div className={styles.wrapper}>
-                    {Albums.length > 0 ? (
-                        Albums.map((item) => (
+                    {albums.length > 0 ? (
+                        albums.map((item) => (
                             <AlbumCard key={item.id} name={item.title} item={item} />
                         ))
                     ) : (
@@ -48,10 +77,15 @@ const page = (props: Props) => {
                 </div>
             </div>
 
-
+            {addPop && (
+                <div className={styles.popBackground} onClick={closeAddPop}>
+                    <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
+                        <NewAlbumModal onClose={closeAddPop} refreshArtists={fetchArtists} />
+                    </div>
+                </div>
+            )}
         </div>
+    );
+};
 
-    )
-}
-
-export default page
+export default page;
