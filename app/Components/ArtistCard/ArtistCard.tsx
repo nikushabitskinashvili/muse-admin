@@ -40,7 +40,8 @@ const ArtistCard = ({
    
 
     return (
-        <Link className={styles.artistCardContainer} href={`artists/${item.id}`}>
+        <Link className={styles.artistCardContainer} href={`/artists/${item.id}`}>
+
             <Image
                 src={item.image}
                 width={130}

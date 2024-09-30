@@ -9,20 +9,29 @@ import axios from "axios";
 const EditPasswordModal = ({title, onClose} : Props) => {
     const [newPassword, setNewPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
+    const [addPop, setAddPop] = useState(false);
+
+    const toggleAddPop = () => {
+        setAddPop(!addPop);
+      };
+
+    const closeAddPop = () => {
+        setAddPop(false);
+      };
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
 
         try {
-            const response = await axios.post("https://back.museappofficial.com/update-password", {
-                password: newPassword,
-            });
-
-            console.log("Password updated:", response.data);
+            const response = await axios.patch(
+                "https://back.museappofficial.com/update-password",
+                { password: newPassword },
+                { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImJsb2NrZWQiOmZhbHNlLCJpYXQiOjE3Mjc2OTg1MTJ9.9iG6XQStR_mZpKtsySoDguNKWVBik4PKDFZuJ-dWZjQ` } }
+            );
         } catch (err) {
-            console.error("Error updating password:", err);
-            setError("Failed to update password. Please try again.");
+            alert("Failed to update password. Please try again.");
         }
     };
 
@@ -30,7 +39,7 @@ const EditPasswordModal = ({title, onClose} : Props) => {
         <div className={styles.container}>
             <div className={styles.head}>
                 <span className={styles.title}>{title}</span>
-                <CloseButton onClick={onClose} bg={true} />
+                <CloseButton onClick={onClose} bg={true} onClose={closeAddPop} />
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.inputCont}>

@@ -1,7 +1,7 @@
 export interface Props {
     title?: string,
     placeholder?: string
-    onClose?: () => void;
+    onClose: () => void;
     closeModal?: () => void
     onSubmit?: () => void;
     bg?: boolean;
@@ -14,7 +14,22 @@ export interface Props {
 export interface Modal {
     name: string;
     cover: any;
-    image?: any;
+    image: any;
     biography: string;
     date?: number;
 }
+
+export interface albumModal {
+    title: string;
+    album: any;
+    releaseDate: number;
+    artistId: number;
+}
+
+export interface songModal {
+    title: string;
+    releaseDate: number;
+    music: any;
+    albumId: number;
+}
+
