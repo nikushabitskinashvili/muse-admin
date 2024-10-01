@@ -31,7 +31,7 @@ const ArtistPage = () => {
 
   const fetchArtists = async () => {
     try {
-      const response = await axios.get("https://back.museappofficial.com/artist", {
+      const response = await axios.get("http://10.10.50.154:3000/artist", {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo",

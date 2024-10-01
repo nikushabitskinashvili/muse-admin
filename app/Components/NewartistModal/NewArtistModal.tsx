@@ -42,8 +42,8 @@ const NewArtistModal = (props: NewArtistModalProps) => {
         const data = new FormData();
         data.append("name", values.name);
         data.append("biography", values.biography);
-        data.append("image", values.image[0]);
         data.append("cover", values.cover[0]);
+        data.append("image", values.image[0]);
 
         reset();
         setSelectedArtistImage(null);
@@ -83,7 +83,7 @@ const NewArtistModal = (props: NewArtistModalProps) => {
                                 className={styles.fileInput}
                                 type="file"
                                 id="image"
-                                {...register('image', {
+                                {...register('cover', {
                                     required: true,
                                     onChange: handleArtistImageChange
                                 })}
@@ -101,7 +101,7 @@ const NewArtistModal = (props: NewArtistModalProps) => {
                                 className={styles.fileInput}
                                 type="file"
                                 id="cover"
-                                {...register('cover', {
+                                {...register('image', {
                                     required: true,
                                     onChange: handleCoverImageChange
                                 })}

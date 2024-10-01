@@ -1,7 +1,6 @@
 export interface Props {
     title?: string,
     placeholder?: string
-    onClose: () => void;
     closeModal?: () => void
     onSubmit?: () => void;
     bg?: boolean;
@@ -9,6 +8,7 @@ export interface Props {
     closepop?: () => void;
     refreshArtists?: () => void;
     id?: number;
+    onClose: () => void;
 }
 
 export interface Modal {
@@ -23,6 +23,7 @@ export interface albumModal {
     title: string;
     album: any;
     releaseDate: number;
+<<<<<<< Updated upstream
     artistId: number;
 }
 
@@ -33,3 +34,8 @@ export interface songModal {
     albumId: number;
 }
 
+=======
+    onClose: () => void;
+    artistId: string | number;
+}
+>>>>>>> Stashed changes
