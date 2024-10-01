@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./ArtistCard.module.scss";
@@ -7,7 +7,7 @@ import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
 const ArtistCard = ({
-    item 
+    item
 }: {
     item: any;
     className?: string;
@@ -20,10 +20,10 @@ const ArtistCard = ({
     useEffect(() => {
         const fetchArtistData = async () => {
             try {
-                const response = await axios.get(`https://back.museappofficial.com/artist/${id}`, {
+                const response = await axios.get(`http://10.10.50.154:3000/artist/${id}`, {
                     headers: {
                         "Content-Type": 'multipart/form-data',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo' 
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo'
                     }
                 });
                 setArtist(response.data);
@@ -35,13 +35,10 @@ const ArtistCard = ({
         if (id) {
             fetchArtistData();
         }
-    }, [id]); 
-    
-   
+    }, [id]);
 
     return (
         <Link className={styles.artistCardContainer} href={`/artists/${item.id}`}>
-
             <Image
                 src={item.image}
                 width={130}

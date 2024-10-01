@@ -3,7 +3,7 @@ import { Button } from "@/app/Components/Buttons/Buttons";
 import styles from "./page.module.scss";
 import AlbumCard from "@/app/Components/AlbumCard/AlbumCard";
 import { useRef, useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import {usePathname} from "next/navigation";
 import axios from "axios";
 import NewAlbumModal from "@/app/Components/NewAlbumModal/NewAlbumModal";
 
@@ -13,48 +13,49 @@ interface Album {
     src: string;
 }
 
-const page = () => {
+const Page = () => {
     const [addPop, setAddPop] = useState(false);
     const addPopRef = useRef<HTMLDivElement>(null);
     const [albums, setAlbums] = useState<Album[]>([]);
-    const params = useParams();
-    const artistId = params.artistId;
+
+    let pathname = usePathname()
+    let id = Number(pathname.slice(pathname.lastIndexOf("/") + 1));
 
     const toggleAddPop = () => {
         setAddPop(!addPop);
-      };
-    
-      const clickOnPop = (event: React.MouseEvent) => {
+    };
+
+    const clickOnPop = (event: React.MouseEvent) => {
         event.stopPropagation();
-      };
-    
-      const closeAddPop = () => {
+    };
+
+    const closeAddPop = () => {
         setAddPop(false);
-      };
+    };
 
     useEffect(() => {
         const fetchAlbums = async () => {
             try {
+<<<<<<< Updated upstream
                 const response = await axios.get(`https://back.museappofficial.com/artist/${artistId}`, {
+=======
+                const response = await axios.get(`http://10.10.50.154:3000/artist/${id}`, {
+>>>>>>> Stashed changes
                     headers: {
                         "Content-Type": "multipart/form-data",
                         Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo",
                     },
                 });
-                setAlbums(response.data);
+                setAlbums(response.data.album);
             } catch (error) {
                 console.error("Error fetching albums:", error);
             }
         };
 
-        if (artistId) {
+        if (id) {
             fetchAlbums();
         }
-    }, [artistId]);
-
-    function fetchArtists(): void {
-        throw new Error("Function not implemented.");
-    }
+    }, [id]);
 
     return (
         <div className={styles.main}>
@@ -69,7 +70,7 @@ const page = () => {
                 <div className={styles.wrapper}>
                     {albums.length > 0 ? (
                         albums.map((item) => (
-                            <AlbumCard key={item.id} name={item.title} item={item} />
+                            <AlbumCard key={item.id} name={item.title} item={item}  />
                         ))
                     ) : (
                         <p className={styles.noAlbum}>No Albums available</p>
@@ -80,7 +81,7 @@ const page = () => {
             {addPop && (
                 <div className={styles.popBackground} onClick={closeAddPop}>
                     <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
-                        <NewAlbumModal onClose={closeAddPop} refreshArtists={fetchArtists} />
+                        <NewAlbumModal onClose={closeAddPop} refreshArtists={() => {}} title="Add Album" album="" releaseDate={0} artistId={id} />
                     </div>
                 </div>
             )}
@@ -88,4 +89,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

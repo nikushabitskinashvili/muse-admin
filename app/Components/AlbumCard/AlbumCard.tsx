@@ -28,7 +28,7 @@ const AlbumCard = ({
         });
         setAlbum(response.data);
       } catch (error) {
-        console.error("Error fetching album data:", error);
+        alert("Error fetching album data");
       }
     };
 
@@ -37,11 +37,21 @@ const AlbumCard = ({
     }
   }, [id]);
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
+  console.log(item);
+  
   return (
+<<<<<<< Updated upstream
     <>
       <Image className={styles.albumImg} src={item.image} alt={item.title} width={150} height={146} />
+=======
+    <div className={styles.albumCard}>
+      <Image className={styles.albumImg} src={item.albumImg} alt={item.title} width={150} height={146} />
+>>>>>>> Stashed changes
       <div className={styles.hoverbtn}>
         <Button bg={"blue"} title={"New Song"} />
       </div>
@@ -49,7 +59,12 @@ const AlbumCard = ({
         <span className={styles.albumTitle}>{item.title}</span>
         <span className={styles.artistName}>{item.subTitle}</span>
       </div>
+<<<<<<< Updated upstream
     </>
+=======
+    </div>
+
+>>>>>>> Stashed changes
   )
 };
 
