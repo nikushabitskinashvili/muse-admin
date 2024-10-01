@@ -3,9 +3,10 @@ import { Button } from "@/app/Components/Buttons/Buttons";
 import styles from "./page.module.scss";
 import AlbumCard from "@/app/Components/AlbumCard/AlbumCard";
 import { useRef, useState, useEffect } from "react";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import axios from "axios";
 import NewAlbumModal from "@/app/Components/NewAlbumModal/NewAlbumModal";
+import NewSongModal from "@/app/Components/NewSongModal/NewSongModal";
 
 interface Album {
     id: string;
@@ -36,11 +37,7 @@ const Page = () => {
     useEffect(() => {
         const fetchAlbums = async () => {
             try {
-<<<<<<< Updated upstream
-                const response = await axios.get(`https://back.museappofficial.com/artist/${artistId}`, {
-=======
                 const response = await axios.get(`http://10.10.50.154:3000/artist/${id}`, {
->>>>>>> Stashed changes
                     headers: {
                         "Content-Type": "multipart/form-data",
                         Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo",
@@ -70,7 +67,7 @@ const Page = () => {
                 <div className={styles.wrapper}>
                     {albums.length > 0 ? (
                         albums.map((item) => (
-                            <AlbumCard key={item.id} name={item.title} item={item}  />
+                            <AlbumCard key={item.id} name={item.title} item={item} />
                         ))
                     ) : (
                         <p className={styles.noAlbum}>No Albums available</p>
@@ -81,11 +78,13 @@ const Page = () => {
             {addPop && (
                 <div className={styles.popBackground} onClick={closeAddPop}>
                     <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
-                        <NewAlbumModal onClose={closeAddPop} refreshArtists={() => {}} title="Add Album" album="" releaseDate={0} artistId={id} />
+                        <NewAlbumModal onClose={closeAddPop} refreshArtists={() => { }} title="Add Album" album="" releaseDate={0} artistId={id} />
                     </div>
                 </div>
             )}
         </div>
+
+
     );
 };
 

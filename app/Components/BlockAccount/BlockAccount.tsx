@@ -1,21 +1,23 @@
-import { Props } from '@/app/interface/props.interface';
+import { Props, User } from '@/app/interface/props.interface';
 import { Button } from '../Buttons/Buttons';
 import styles from './BlockAccount.module.scss';
 import axios from 'axios';
 
-const BlockAccount = (props: Props) => {
+const BlockAccount = (props: User) => {
+
   const handleBlockUser = async () => {
     try {
       await axios.patch(
-        `https://back.museappofficial.com/user/${props.id}`, 
-        { blocked: true }, 
+        `http://10.10.50.154:3000/user/${props.id}`,
+        { id : props.id ,blocked: true },
         {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImJsb2NrZWQiOmZhbHNlLCJpYXQiOjE3Mjc2OTg1MTJ9.9iG6XQStR_mZpKtsySoDguNKWVBik4PKDFZuJ-dWZjQ', 
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImJsb2NrZWQiOmZhbHNlLCJpYXQiOjE3Mjc2OTg1MTJ9.9iG6XQStR_mZpKtsySoDguNKWVBik4PKDFZuJ-dWZjQ',
             'Content-Type': 'application/json',
           },
         }
       );
+
     } catch (error) {
       alert('Could not block user!');
     }

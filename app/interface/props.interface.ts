@@ -7,7 +7,7 @@ export interface Props {
     onClick?: () => void;
     closepop?: () => void;
     refreshArtists?: () => void;
-    id?: number;
+    id?: string;
     onClose: () => void;
 }
 
@@ -23,19 +23,26 @@ export interface albumModal {
     title: string;
     album: any;
     releaseDate: number;
-<<<<<<< Updated upstream
     artistId: number;
+    onClose?: any;
 }
 
 export interface songModal {
-    title: string;
-    releaseDate: number;
+    name: string;
     music: any;
     albumId: number;
+    onClose?: () => void;
 }
 
-=======
+ export interface User {
+    id: string;
+    email: string;
+    role: string;
+    blocked: boolean; 
     onClose: () => void;
-    artistId: string | number;
 }
->>>>>>> Stashed changes
+
+
+
+
+

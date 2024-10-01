@@ -12,7 +12,7 @@ import { useParams, usePathname } from 'next/navigation';
 
 interface NewAlbumModalProps extends albumModal {
     refreshArtists: () => void;
-    artistId: string | number;
+    artistId: number ;
 }
 
 const NewAlbumModal = (props: NewAlbumModalProps) => {
@@ -47,26 +47,17 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
     const onSubmit = async (values: albumModal) => {
         const data = new FormData();
         data.append("title", values.title);
-<<<<<<< Updated upstream
-        data.append("releaseDate", String(values.releaseDate))
-        data.append("album", values.album[0]);
-        data.append("artistId", String(values.artistId))
-
-        console.log(values, "sbdsdh");
-
-=======
         data.append("releaseDate", String(values.releaseDate));
         data.append("album", values.album[0]);
         data.append("artistId", String(id));
->>>>>>> Stashed changes
+
 
         reset();
         setSelectedArtistImage(null);
         setSelectedCoverImage(null);
         console.log(data);
-        
+
         try {
-<<<<<<< Updated upstream
 
             await axios.post('https://back.museappofficial.com/album', data, {
 
@@ -75,39 +66,19 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImJsb2NrZWQiOmZhbHNlLCJpYXQiOjE3Mjc2MTg1MzR9.SgjsVIx5B0EmWYqIA9VRBtMKftaewtypEUfh9T5jcJA'
                 }
             });
-=======
-            await axios.post('http://10.10.50.154:3000/album', data, {
-                headers: {
-                    "Content-Type": 'multipart/form-data',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo'
-                }
-            });
-           
->>>>>>> Stashed changes
+
             props.refreshArtists();
             props.onClose();
         } catch (error) {
             alert('Could not upload album!');
         }
-<<<<<<< Updated upstream
     };
-
-=======
-        console.log(data, "data")
-    };
-
-    
-
->>>>>>> Stashed changes
     return (
         <div className={styles.container}>
             <div className={styles.head}>
                 <span className={styles.title}>{props.title}</span>
-<<<<<<< Updated upstream
                 <CloseButton onClick={props.onClose} bg={true} onClose={props.onClose} />
-=======
-                <CloseButton onClick={props.onClose} bg={true} />
->>>>>>> Stashed changes
+
             </div>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.inputs}>
@@ -129,10 +100,6 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
                                     onChange: handleCoverImageChange
                                 })}
                             />
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
                         </label>
                     </div>
                     <div className={styles.inputsWrapper}>
@@ -144,12 +111,9 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
                                 placeholder="Album Title"
                                 {...register('title', { required: true })}
                             />
-<<<<<<< Updated upstream
-                            {errors.title && <span className={styles.error}>title is required</span>}
-=======
                             {errors.title && <span className={styles.error}>Title is required</span>}
->>>>>>> Stashed changes
-                        </div>
+
+                        </div >
 
                         <div className={styles.inp}>
                             <h2 className={styles.text}>Album Release Date</h2>
@@ -162,10 +126,10 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
                             />
                         </div>
                         <Button bg={'pink'} title={"Add Album"} size={'huge'} />
-                    </div>
-                </div>
-            </form>
-        </div>
+                    </div >
+                </div >
+            </form >
+        </div >
     );
 };
 

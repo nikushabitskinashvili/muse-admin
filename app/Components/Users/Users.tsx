@@ -1,38 +1,29 @@
 "use client"
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Table } from "antd";
 import BlockAccount from "@/app/Components/BlockAccount/BlockAccount"; 
 import EditPasswordModal from "@/app/Components/EditPasswordModal/EditPasswordModal";
 import styles from "./Users.module.scss";
-import { Props } from "@/app/interface/props.interface";
+import { Props, User } from "@/app/interface/props.interface";
 import Link from 'next/link';
 import axios from 'axios';
-
-interface User {
-    id: string;
-    email: string;
-    role: string;
-    blocked: boolean; 
-}
 
 const Users = (props: Props) => {
     const [users, setUsers] = useState<User[]>([]);
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
-    const [isBlockAccountModalOpen, setIsBlockAccountModalOpen] = useState(false); 
-    const [selectedUser, setSelectedUser] = useState<string | null>(null);
-    const [addPop, setAddPop] = useState(false);
-    const addPopRef = useRef<HTMLDivElement>(null);
+    const [isBlockAccountModalOpen, setIsBlockAccountModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get('https://back.museappofficial.com/user', {
                     headers: {
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo', 
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo',
                     },
                 });
-                setUsers(response.data); 
+                setUsers(response.data);
             } catch (error) {
                 alert('Could not fetch users!');
             }
@@ -41,33 +32,29 @@ const Users = (props: Props) => {
         fetchUsers();
     }, []);
 
-    const openChangePasswordModal = (user: string) => {
+    const openChangePasswordModal = (user: User) => {
         setSelectedUser(user);
         setIsChangePasswordModalOpen(true);
     };
 
-    const openBlockAccountModal = (user: string) => {
+    const openBlockAccountModal = (user: User) => {
         setSelectedUser(user);
-        setIsBlockAccountModalOpen(true); 
-    };
-
-    const toggleAddPop = () => {
-        setAddPop(!addPop);
+        setIsBlockAccountModalOpen(true);
     };
 
     const clickOnPop = (event: React.MouseEvent) => {
         event.stopPropagation();
     };
 
-    const closeAddPop = () => {
-        setAddPop(false);
+    const closeModal = () => {
+        setIsChangePasswordModalOpen(false);
         setIsBlockAccountModalOpen(false);
     };
 
     const columns = [
         {
             title: "Users",
-            dataIndex: "email", 
+            dataIndex: "email",
             key: "users",
             render: (text: string, record: User) => (
                 <Link href={`/playlists/${record.id}`}>{text}</Link>
@@ -85,7 +72,7 @@ const Users = (props: Props) => {
                         alt="edit Icon"
                         width={24}
                         height={24}
-                        onClick={() => openChangePasswordModal(record.email)} 
+                        onClick={() => openChangePasswordModal(record)}
                     />
                     <Image
                         style={{ borderRadius: "4px", background: "#E82567", cursor: "pointer" }}
@@ -93,7 +80,7 @@ const Users = (props: Props) => {
                         alt="block Icon"
                         width={24}
                         height={24}
-                        onClick={() => openBlockAccountModal(record.email)} 
+                        onClick={() => openBlockAccountModal(record)}
                     />
                 </div>
             ),
@@ -108,18 +95,24 @@ const Users = (props: Props) => {
                 </div>
             </div>
 
-            {isChangePasswordModalOpen && (
-                <div className={styles.popBackground} onClick={closeAddPop}>
-                    <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
-                        <EditPasswordModal title="Edit Password" onClose={closeAddPop} />
+            {isChangePasswordModalOpen && selectedUser && (
+                <div className={styles.popBackground} onClick={closeModal}>
+                    <div onClick={clickOnPop} className={styles.popContainer}>
+                        <EditPasswordModal title="Edit Password" onClose={closeModal} />
                     </div>
                 </div>
             )}
 
-            {isBlockAccountModalOpen && (
-                <div className={styles.popBackground} onClick={closeAddPop}>
-                    <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
-                        <BlockAccount onClose={closeAddPop} />
+            {isBlockAccountModalOpen && selectedUser && (
+                <div className={styles.popBackground} onClick={closeModal}>
+                    <div onClick={clickOnPop} className={styles.popContainer}>
+                        <BlockAccount
+                            onClose={closeModal}
+                            id={selectedUser.id}
+                            email={selectedUser.email}
+                            role={selectedUser.role}
+                            blocked={selectedUser.blocked}
+                        />
                     </div>
                 </div>
             )}
