@@ -1,16 +1,18 @@
-"use client";
-import styles from './NewSongModal.module.scss';
-import React, { useState } from "react";
+// Make sure to import necessary types
+import { Props, songModal } from '@/app/interface/props.interface'; // Import the necessary types
+import axios from 'axios';
 import { Button } from '../Buttons/Buttons';
 import CloseButton from '../CloseButton/CloseButton';
 import { useForm } from 'react-hook-form';
-import { Props, songModal } from '@/app/interface/props.interface';
-import axios from 'axios';
-import { IconEnum } from '@/app/utlis/icons/icons';
+import React, { useState } from "react";
+import styles from './NewSongModal.module.scss';
 import Image from 'next/image';
+import { IconEnum } from '@/app/utlis/icons/icons';
+import BaseApi from '@/app/api/baseApi';
 
 interface NewSongModalProps extends Props {
     refreshSongs: () => void;
+    albumId: number | null;
 }
 
 const NewSongModal = (props: NewSongModalProps) => {
@@ -32,15 +34,14 @@ const NewSongModal = (props: NewSongModalProps) => {
 
     const onSubmit = async (values: songModal) => {
         const data = new FormData();
-        data.append("title", values.title);
-        data.append("releaseDate", String(values.releaseDate));
+        data.append("name", values.name);
         data.append("music", values.music[0]);
-        data.append("albumId", String(values.albumId));
+        data.append("albumId", String(props.albumId));
 
         reset();
         setSelectedCoverImage(null);
         try {
-            await axios.post('https://back.museappofficial.com/song', data, {
+            await BaseApi.post('http://10.10.50.154:3000/music', data, {
                 headers: {
                     "Content-Type": 'multipart/form-data',
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo'
@@ -62,10 +63,10 @@ const NewSongModal = (props: NewSongModalProps) => {
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.inputs}>
                     <div className={styles.inputsWrapper}>
-                        <label htmlFor="cover" className={styles.img}>
+                        <label htmlFor="song" className={styles.img}>
                             <Image
                                 src={selectedCoverImage || IconEnum.COVER}
-                                alt="cover"
+                                alt="song"
                                 width={454}
                                 height={170}
                                 style={{ cursor: 'pointer' }}
@@ -73,7 +74,7 @@ const NewSongModal = (props: NewSongModalProps) => {
                             <input
                                 className={styles.fileInput}
                                 type="file"
-                                id="cover"
+                                id="song"
                                 {...register('music', {
                                     required: true,
                                     onChange: handleCoverImageChange
@@ -86,9 +87,9 @@ const NewSongModal = (props: NewSongModalProps) => {
                                 className={styles.input}
                                 type="text"
                                 placeholder="Song Title"
-                                {...register('title', { required: true })}
+                                {...register('name', { required: true })}
                             />
-                            {errors.title && <span className={styles.error}>Title is required</span>}
+                            {errors.name && <span className={styles.error}>Title is required</span>}
                         </div>
                         <Button bg={'pink'} title={"Add Song"} size={'huge'} />
                     </div>
