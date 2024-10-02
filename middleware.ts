@@ -1,16 +1,16 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify } from "jose"; // Import jose for decoding the token
-const AUTH_COOKIE_KEY =  'auth'
+import { jwtVerify, decodeJwt } from "jose"; // Import decodeJwt
 
-// Utility function to decode and verify JWT
+const AUTH_COOKIE_KEY = 'auth';
+
 async function verifyToken(token: string) {
-    const secret = new TextEncoder().encode("daculiparoli"); // Use your actual secret key
+    const secret = new TextEncoder().encode("daculiparoli");
     try {
         const { payload } = await jwtVerify(token, secret);
         return payload;
     } catch (error) {
-        console.error("Invalid token:", error);
+        console.error("Invalid token during verification:", error);
         return null;
     }
 }
@@ -30,17 +30,15 @@ export async function middleware(request: NextRequest) {
 
     if (cookie?.value) {
         const token = cookie.value;
-        const decodedToken = await verifyToken(token);
 
-        if(decodedToken.role !== "admin" || decodedToken.role === "Admin") {
-            throw new Error("Invalid token:", decodedToken);
-        }
-
-        if (decodedToken && decodedToken.blocked) {
-            const response = NextResponse.redirect(new URL("/auth/login?error=blocked", request.url));
+        // Step 1: Decode the token without verifying
+        const decodedToken = decodeJwt(token); 
+        if (decodedToken && decodedToken.role !== "admin") {
+            const response = NextResponse.redirect(new URL("/auth/login?error=unAuthorized", request.url));
             response.cookies.set(AUTH_COOKIE_KEY, '', { expires: new Date(0), path: '/' });
             return response;
-        }
+          }
+        
     }
 
     return NextResponse.next();

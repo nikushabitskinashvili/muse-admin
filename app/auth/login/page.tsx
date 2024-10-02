@@ -7,6 +7,7 @@ import Link from "next/link";
 import AuthButton from "@/app/Components/AuthButton/AuthButton";
 import AuthInput from "@/app/Components/AuthInput/AuthInput";
 import AuthTitle from "@/app/Components/AuthTitle/AuthTItle";
+import { handleLogin } from "@/app/scripts/Login";
 
 export default function Login() {
   const [emailOrUsername, setEmailOrUsername] = useState("");
@@ -66,17 +67,23 @@ export default function Login() {
     return valid;
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Email", emailOrUsername);
-      console.log("Password:", password);
+    const result = await handleLogin(emailOrUsername, password);
+
+    if (result.success) {
+      window.location.reload();
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        general:
+          result.errorMessage || "An error occurred. Please try again later.",
+      }));
     }
   };
 
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      
       <div className={styles.rightBlock}>
         <AuthTitle title="Log in" />
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -109,13 +116,7 @@ export default function Login() {
             type="submit"
           />
         </form>
-        
       </div>
     </div>
   );
 }
-
-
-
-
-
