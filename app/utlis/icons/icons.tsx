@@ -13,7 +13,8 @@ export enum IconEnum {
   FILEUPLOAD = "/icons/fileUpload.svg",
   BIN = "/icons/bin.svg",
   COVER = "/icons/cover.svg",
-  ALBUMUPLOAD = "/icons/albumUpload.svg"
+  ALBUMUPLOAD = "/icons/albumUpload.svg",
+  SONGUPLOAD = "/icons/songUpload.svg"
 
 }
 

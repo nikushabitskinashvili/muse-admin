@@ -13,16 +13,7 @@ const BlockAccount = (props: User) => {
     const apiEndpoint = newBlockState ? `/user/block/${props.id}` : `/user/unblock/${props.id}`;
 
     try {
-      const response = await BaseApi.put(
-        `http://10.10.50.154:3000${apiEndpoint}`,
-        {},
-        {
-          headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImJsb2NrZWQiOmZhbHNlLCJpYXQiOjE3Mjc2OTg1MTJ9.9iG6XQStR_mZpKtsySoDguNKWVBik4PKDFZuJ-dWZjQ',
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await BaseApi.put(apiEndpoint);
 
       if (response.status === 200) {
         setIsBanned(newBlockState);

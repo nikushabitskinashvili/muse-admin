@@ -41,12 +41,7 @@ const NewSongModal = (props: NewSongModalProps) => {
         reset();
         setSelectedCoverImage(null);
         try {
-            await BaseApi.post('http://10.10.50.154:3000/music', data, {
-                headers: {
-                    "Content-Type": 'multipart/form-data',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo'
-                }
-            });
+            await BaseApi.post('/music', data);
             props.refreshSongs();
             props.onClose();
         } catch (error) {
@@ -62,25 +57,25 @@ const NewSongModal = (props: NewSongModalProps) => {
             </div>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.inputs}>
+                    <label htmlFor="music" className={styles.img}>
+                        <Image
+                            src={selectedCoverImage || IconEnum.SONGUPLOAD}
+                            alt="music"
+                            width={161}
+                            height={162}
+                            style={{ cursor: 'pointer' }}
+                        />
+                        <input
+                            className={styles.fileInput}
+                            type="file"
+                            id="music"
+                            {...register('music', {
+                                required: true,
+                                onChange: handleCoverImageChange
+                            })}
+                        />
+                    </label>
                     <div className={styles.inputsWrapper}>
-                        <label htmlFor="song" className={styles.img}>
-                            <Image
-                                src={selectedCoverImage || IconEnum.COVER}
-                                alt="song"
-                                width={454}
-                                height={170}
-                                style={{ cursor: 'pointer' }}
-                            />
-                            <input
-                                className={styles.fileInput}
-                                type="file"
-                                id="song"
-                                {...register('music', {
-                                    required: true,
-                                    onChange: handleCoverImageChange
-                                })}
-                            />
-                        </label>
                         <div className={styles.inp}>
                             <h2 className={styles.text}>Song Title</h2>
                             <input

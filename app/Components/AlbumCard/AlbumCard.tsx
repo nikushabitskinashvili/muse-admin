@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { Button } from "../Buttons/Buttons";
 import NewSongModal from "../NewSongModal/NewSongModal";
+import BaseApi from "@/app/api/baseApi";
 
 const AlbumCard = ({
   item
@@ -36,12 +37,7 @@ const AlbumCard = ({
   useEffect(() => {
     const fetchAlbumData = async () => {
       try {
-        const response = await axios.get(`http://10.10.50.154:3000/albums/${id}`, {
-          headers: {
-            "Content-Type": 'multipart/form-data',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo'
-          }
-        });
+        const response = await BaseApi.get(`/albums/${id}`);
         setAlbum(response.data);
       } catch (error) {
         alert("Error fetching album data");

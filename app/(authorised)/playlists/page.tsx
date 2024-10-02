@@ -5,6 +5,7 @@ import PlaylistCard from '@/app/Components/PlaylistCard/PlaylistCard';
 import styles from './page.module.scss';
 import CloseButton from '@/app/Components/CloseButton/CloseButton';
 import Link from 'next/link';
+import BaseApi from '@/app/api/baseApi';
 
 interface Album {
     id: string;
@@ -20,7 +21,7 @@ const Albums = () => {
     useEffect(() => {
         const fetchAlbums = async () => {
             try {
-                const response = await axios.get('https://back.museappofficial.com/albums/popular');
+                const response = await BaseApi.get('/albums/popular');
                 setPlaylist(response.data);
                 setLoading(false);
             } catch (err) {

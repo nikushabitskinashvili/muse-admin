@@ -5,6 +5,7 @@ import styles from "./ArtistCard.module.scss";
 import Link from "next/link";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
+import BaseApi from "@/app/api/baseApi";
 
 const ArtistCard = ({
     item
@@ -20,12 +21,7 @@ const ArtistCard = ({
     useEffect(() => {
         const fetchArtistData = async () => {
             try {
-                const response = await axios.get(`http://10.10.50.154:3000/artist/${id}`, {
-                    headers: {
-                        "Content-Type": 'multipart/form-data',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo'
-                    }
-                });
+                const response = await BaseApi.get(`/artist/${id}`);
                 setArtist(response.data);
             } catch (error) {
                 console.error("Error fetching artist data:", error);

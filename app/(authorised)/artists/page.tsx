@@ -5,6 +5,7 @@ import styles from "./page.module.scss";
 import { Button } from "@/app/Components/Buttons/Buttons";
 import NewArtistModal from "@/app/Components/NewartistModal/NewArtistModal";
 import ArtistCard from "@/app/Components/ArtistCard/ArtistCard";
+import BaseApi from "@/app/api/baseApi";
 
 interface Artist {
   id: string;
@@ -31,12 +32,7 @@ const ArtistPage = () => {
 
   const fetchArtists = async () => {
     try {
-      const response = await axios.get("http://10.10.50.154:3000/artist", {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo",
-        },
-      });
+      const response = await BaseApi.get("/artist");
       setArtists(response.data);
     } catch (error) {
       console.error("Error fetching artists:", error);

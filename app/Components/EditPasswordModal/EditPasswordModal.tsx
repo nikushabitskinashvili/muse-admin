@@ -1,23 +1,23 @@
 "use client";
-import { Props } from "@/app/interface/props.interface"; 
+import { Props } from "@/app/interface/props.interface";
 import { Button } from "../Buttons/Buttons";
 import CloseButton from "../CloseButton/CloseButton";
 import styles from "./EditPasswordModal.module.scss";
 import { useState } from "react";
 import axios from "axios";
 
-const EditPasswordModal = ({title, onClose} : Props) => {
+const EditPasswordModal = ({ title, onClose }: Props) => {
     const [newPassword, setNewPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
     const [addPop, setAddPop] = useState(false);
 
     const toggleAddPop = () => {
         setAddPop(!addPop);
-      };
+    };
 
     const closeAddPop = () => {
         setAddPop(false);
-      };
+    };
 
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -25,10 +25,8 @@ const EditPasswordModal = ({title, onClose} : Props) => {
         setError(null);
 
         try {
-            const response = await axios.patch(
-                "https://back.museappofficial.com/update-password",
+            const response = await axios.patch("/update-password",
                 { password: newPassword },
-                { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImJsb2NrZWQiOmZhbHNlLCJpYXQiOjE3Mjc2OTg1MTJ9.9iG6XQStR_mZpKtsySoDguNKWVBik4PKDFZuJ-dWZjQ` } }
             );
         } catch (err) {
             alert("Failed to update password. Please try again.");

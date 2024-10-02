@@ -5,6 +5,7 @@ import axios from 'axios';
 import styles from './page.module.scss';
 import { useParams, useRouter } from 'next/navigation'; 
 import HandleDelete from '@/app/Components/HandleDelete/HandleDelete';
+import BaseApi from '@/app/api/baseApi';
 
 interface Playlist {
     id: number;
@@ -19,7 +20,7 @@ const PlaylistDetailPage = () => {
     useEffect(() => {
         const fetchPlaylistDetails = async () => {
             try {
-                const response = await axios.get(`https://back.museappofficial.com/playlists/${id}`); 
+                const response = await BaseApi.get(`/playlists/${id}`); 
                 setPlaylist(response.data);
             } catch (error) {
                 console.error('Failed to fetch playlist details', error);
