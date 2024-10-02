@@ -61,7 +61,7 @@ const AlbumCard = ({
         <span className={styles.artistName}>{item.subTitle}</span>
       </div>
       <div className={styles.hoverbtn}>
-        <Button bg={"blue"} title={"New Song"} onClick={() => toggleAddPop(item.id)} />
+        <Button bg={"blue"} title={"+ Add New Song"} onClick={() => toggleAddPop(item.id)} size={"big"} />
       </div>
 
       {addPop && (

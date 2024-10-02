@@ -2,14 +2,20 @@ import { Props, User } from '@/app/interface/props.interface';
 import { Button } from '../Buttons/Buttons';
 import styles from './BlockAccount.module.scss';
 import axios from 'axios';
+import { useState } from 'react';
+import BaseApi from '@/app/api/baseApi';
 
 const BlockAccount = (props: User) => {
+  const [isBanned, setIsBanned] = useState(props.blocked);
 
   const handleBlockUser = async () => {
+    const newBlockState = !isBanned;
+    const apiEndpoint = newBlockState ? `/user/block/${props.id}` : `/user/unblock/${props.id}`;
+
     try {
-      await axios.patch(
-        `http://10.10.50.154:3000/user/${props.id}`,
-        { id : props.id ,blocked: true },
+      const response = await BaseApi.put(
+        `http://10.10.50.154:3000${apiEndpoint}`,
+        {},
         {
           headers: {
             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImJsb2NrZWQiOmZhbHNlLCJpYXQiOjE3Mjc2OTg1MTJ9.9iG6XQStR_mZpKtsySoDguNKWVBik4PKDFZuJ-dWZjQ',
@@ -18,8 +24,11 @@ const BlockAccount = (props: User) => {
         }
       );
 
+      if (response.status === 200) {
+        setIsBanned(newBlockState);
+      }
     } catch (error) {
-      alert('Could not block user!');
+      alert(`Could not ${newBlockState ? 'ban' : 'unban'} user!`);
     }
   };
 
@@ -27,8 +36,12 @@ const BlockAccount = (props: User) => {
     <div className={styles.container}>
       <form className={styles.form}>
         <div className={styles.texts}>
-          <h2 className={styles.text}>Block this account?</h2>
-          <p>Are you sure you want to block this account?</p>
+          <h2 className={styles.text}>
+            {isBanned ? 'Unblock this account?' : 'Block this account?'}
+          </h2>
+          <p>
+            Are you sure you want to {isBanned ? 'unblock' : 'block'} this account?
+          </p>
         </div>
         <div className={styles.buttons}>
           <Button
@@ -39,7 +52,7 @@ const BlockAccount = (props: User) => {
           />
           <Button
             bg={'pink'}
-            title={"Block"}
+            title={isBanned ? 'Unblock' : 'Block'}
             size={'normal'}
             onClick={handleBlockUser}
           />

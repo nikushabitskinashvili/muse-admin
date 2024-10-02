@@ -35,11 +35,11 @@ export interface songModal {
 }
 
  export interface User {
-    id: string;
+    id: number;
     email: string;
     role: string;
     blocked: boolean; 
-    onClose: () => void;
+    onClose?: () => void;
 }
 
 

@@ -4,21 +4,33 @@ import styles from "./SearchInput.module.scss";
 import React, { useState } from 'react';
 import Image from "next/image";
 import { IconEnum } from "@/app/utlis/icons/icons";
+import { User } from "@/app/interface/props.interface";
+import BaseApi from "@/app/api/baseApi";
 
 const SearchInput: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>('');
-    const [filteredResults, setFilteredResults] = useState<string[]>([]);
+    const [filteredResults] = useState<string[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
+    const [filteredSongs, setFilteredSongs] = useState<User[]>([]);
 
 
-    const users = ["Abbey Road", "Back in Black", "Hotel California", "Dark Side of the Moon", "Rumours", "Sgt. Pepper", "Thriller", "The Wall", "Born to Run"];
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const searchQuery = event.target.value.toLowerCase();
-        setInputValue(searchQuery);
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
 
-        const filtered = users.filter(user => user.toLowerCase().startsWith(searchQuery));
-        setFilteredResults(filtered);
+        setInputValue(value);
+
+        if (value.trim() === '') {
+            setFilteredSongs(users);
+            return;
+        }
+
+        const lowercasedValue = value.toLowerCase();
+        BaseApi.get(`/search?query=${lowercasedValue}`).then((response) => {
+            setFilteredSongs(response.data.musics);
+        });
     };
+
 
     return (
         <div className={styles.wrapper}>
@@ -28,9 +40,10 @@ const SearchInput: React.FC = () => {
                     type="text"
                     placeholder="Search"
                     value={inputValue}
-                    onChange={handleChange}
+                    onChange={handleSearch}
                     className={styles.input}
                 />
+
             </div>
 
             {inputValue && (

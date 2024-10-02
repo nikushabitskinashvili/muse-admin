@@ -9,6 +9,7 @@ import axios from 'axios';
 import { IconEnum } from '@/app/utlis/icons/icons';
 import Image from 'next/image';
 import { useParams, usePathname } from 'next/navigation';
+import BaseApi from '@/app/api/baseApi';
 
 interface NewAlbumModalProps extends albumModal {
     refreshArtists: () => void;
@@ -59,13 +60,7 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
 
         try {
 
-            await axios.post('https://back.museappofficial.com/album', data, {
-
-                headers: {
-                    "Content-Type": 'multipart/form-data',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImJsb2NrZWQiOmZhbHNlLCJpYXQiOjE3Mjc2MTg1MzR9.SgjsVIx5B0EmWYqIA9VRBtMKftaewtypEUfh9T5jcJA'
-                }
-            });
+            await BaseApi.post('/album', data);
 
             props.refreshArtists();
             props.onClose();

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "@/app/(authorised)/artists/page.module.scss";
 import { PlaylistItem } from "../PlaylistItem/PlaylistItem";
+import BaseApi from "@/app/api/baseApi";
 
 interface Playlist {
     id: number;
@@ -20,7 +21,7 @@ interface Playlist {
   
     const handleDelete = async (playlistId: number) => {
         try {
-            await axios.delete(`https://back.museappofficial.com/albums/${playlistId}`); 
+            await BaseApi.delete(`albums/${playlistId}`); 
             setPlaylists(Playlists.filter(playlist => playlist.id !== playlistId));
         } catch (error) {
             console.error("Failed to delete album.", error);

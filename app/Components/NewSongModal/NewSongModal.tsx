@@ -8,10 +8,11 @@ import React, { useState } from "react";
 import styles from './NewSongModal.module.scss';
 import Image from 'next/image';
 import { IconEnum } from '@/app/utlis/icons/icons';
+import BaseApi from '@/app/api/baseApi';
 
 interface NewSongModalProps extends Props {
     refreshSongs: () => void;
-    albumId: number | null; // Add albumId prop
+    albumId: number | null;
 }
 
 const NewSongModal = (props: NewSongModalProps) => {
@@ -35,12 +36,12 @@ const NewSongModal = (props: NewSongModalProps) => {
         const data = new FormData();
         data.append("name", values.name);
         data.append("music", values.music[0]);
-        data.append("albumId", String(props.albumId)); 
+        data.append("albumId", String(props.albumId));
 
         reset();
         setSelectedCoverImage(null);
         try {
-            await axios.post('http://10.10.50.154:3000/music', data, {
+            await BaseApi.post('http://10.10.50.154:3000/music', data, {
                 headers: {
                     "Content-Type": 'multipart/form-data',
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNzM1MjkyN30.Z174f2qBn0P4m9606SJMDQuvBYMxuDKbeMNi6YMsgoo'
