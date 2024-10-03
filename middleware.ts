@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify, decodeJwt } from "jose"; // Import decodeJwt
+import { jwtVerify, decodeJwt } from "jose";
 
 const AUTH_COOKIE_KEY = 'auth';
 
@@ -31,7 +31,6 @@ export async function middleware(request: NextRequest) {
     if (cookie?.value) {
         const token = cookie.value;
 
-        // Step 1: Decode the token without verifying
         const decodedToken = decodeJwt(token); 
         if (decodedToken && decodedToken.role !== "admin") {
             const response = NextResponse.redirect(new URL("/auth/login?error=unAuthorized", request.url));

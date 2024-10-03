@@ -5,7 +5,6 @@ import { Button } from '../Buttons/Buttons';
 import CloseButton from '../CloseButton/CloseButton';
 import { useForm } from 'react-hook-form';
 import { Modal, Props } from '@/app/interface/props.interface';
-import axios from 'axios';
 import { IconEnum } from '@/app/utlis/icons/icons';
 import Image from 'next/image';
 import BaseApi from '@/app/api/baseApi';

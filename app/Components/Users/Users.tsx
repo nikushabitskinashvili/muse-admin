@@ -7,7 +7,6 @@ import EditPasswordModal from "@/app/Components/EditPasswordModal/EditPasswordMo
 import styles from "./Users.module.scss";
 import { Props, User } from "@/app/interface/props.interface";
 import Link from 'next/link';
-import axios from 'axios';
 import BaseApi from "@/app/api/baseApi";
 
 const Users = (props: Props) => {

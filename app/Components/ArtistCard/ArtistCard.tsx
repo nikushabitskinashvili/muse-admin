@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./ArtistCard.module.scss";
 import Link from "next/link";
-import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import BaseApi from "@/app/api/baseApi";
 

@@ -4,7 +4,7 @@ import { Button } from "../Buttons/Buttons";
 import CloseButton from "../CloseButton/CloseButton";
 import styles from "./EditPasswordModal.module.scss";
 import { useState } from "react";
-import axios from "axios";
+import BaseApi from "@/app/api/baseApi";
 
 const EditPasswordModal = ({ title, onClose }: Props) => {
     const [newPassword, setNewPassword] = useState<string>("");
@@ -25,7 +25,7 @@ const EditPasswordModal = ({ title, onClose }: Props) => {
         setError(null);
 
         try {
-            const response = await axios.patch("/update-password",
+            const response = await BaseApi.patch("/update-password",
                 { password: newPassword },
             );
         } catch (err) {

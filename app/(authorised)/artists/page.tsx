@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import styles from "./page.module.scss";
 import { Button } from "@/app/Components/Buttons/Buttons";
 import NewArtistModal from "@/app/Components/NewartistModal/NewArtistModal";

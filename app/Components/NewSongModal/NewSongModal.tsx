@@ -1,6 +1,4 @@
-// Make sure to import necessary types
-import { Props, songModal } from '@/app/interface/props.interface'; // Import the necessary types
-import axios from 'axios';
+import { Props, songModal } from '@/app/interface/props.interface'; 
 import { Button } from '../Buttons/Buttons';
 import CloseButton from '../CloseButton/CloseButton';
 import { useForm } from 'react-hook-form';

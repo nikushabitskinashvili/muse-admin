@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import styles from "@/app/(authorised)/artists/page.module.scss";
 import { PlaylistItem } from "../PlaylistItem/PlaylistItem";
 import BaseApi from "@/app/api/baseApi";

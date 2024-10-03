@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./AlbumCard.module.scss";
-import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { Button } from "../Buttons/Buttons";
 import NewSongModal from "../NewSongModal/NewSongModal";

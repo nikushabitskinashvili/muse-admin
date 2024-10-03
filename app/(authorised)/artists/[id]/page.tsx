@@ -4,7 +4,6 @@ import styles from "./page.module.scss";
 import AlbumCard from "@/app/Components/AlbumCard/AlbumCard";
 import { useRef, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import axios from "axios";
 import NewAlbumModal from "@/app/Components/NewAlbumModal/NewAlbumModal";
 import NewSongModal from "@/app/Components/NewSongModal/NewSongModal";
 import BaseApi from "@/app/api/baseApi";

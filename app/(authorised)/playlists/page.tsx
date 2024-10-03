@@ -1,6 +1,5 @@
 "use client"
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import PlaylistCard from '@/app/Components/PlaylistCard/PlaylistCard';
 import styles from './page.module.scss';
 import CloseButton from '@/app/Components/CloseButton/CloseButton';
@@ -39,7 +38,9 @@ const Albums = () => {
                 <div className={styles.albumTxt}>
                     <span>user's playlists</span>
                     <Link href={"/"}>
-                        <CloseButton bg={true} />
+                        <CloseButton bg={true} onClose={function (): void {
+                            throw new Error('Function not implemented.');
+                        } } />
                     </Link>
 
                 </div>

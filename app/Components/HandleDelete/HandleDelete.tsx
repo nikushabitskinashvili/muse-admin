@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { FC } from 'react';
 import Image from 'next/image';
 import { IconEnum } from '@/app/utlis/icons/icons';

@@ -1,7 +1,6 @@
 import { Props, User } from '@/app/interface/props.interface';
 import { Button } from '../Buttons/Buttons';
 import styles from './BlockAccount.module.scss';
-import axios from 'axios';
 import { useState } from 'react';
 import BaseApi from '@/app/api/baseApi';
 

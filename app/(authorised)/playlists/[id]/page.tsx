@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import PlaylistWrapper from '@/app/Components/PlaylistWrapper/PlaylistWrapper';
-import axios from 'axios';
 import styles from './page.module.scss';
 import { useParams, useRouter } from 'next/navigation'; 
 import HandleDelete from '@/app/Components/HandleDelete/HandleDelete';
@@ -34,7 +33,7 @@ const PlaylistDetailPage = () => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`https://back.museappofficial.com/playlists/${id}`); 
+            await BaseApi.delete(`/playlists/${id}`); 
             router.push('/playlists'); 
         } catch (error) {
             console.error('Failed to delete playlist', error);
