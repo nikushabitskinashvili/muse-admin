@@ -95,7 +95,7 @@ const Users = () => {
             {isChangePasswordModalOpen && selectedUser && (
                 <div className={styles.popBackground} onClick={closeModal}>
                     <div onClick={clickOnPop} className={styles.popContainer}>
-                        <EditPasswordModal title="Edit Password" onClose={closeModal} />
+                        <EditPasswordModal id={selectedUser.id} title="Edit Password" onClose={closeModal} />
                     </div>
                 </div>
             )}

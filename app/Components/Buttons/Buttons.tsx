@@ -12,7 +12,7 @@ interface Props {
     icon?: keyof typeof IconEnum;
     hoverIcon?: keyof typeof IconEnum;
     activeIcon?: keyof typeof IconEnum;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void; // Update to accept event
     onClickSecond?: (value: boolean) => void;
 }
 

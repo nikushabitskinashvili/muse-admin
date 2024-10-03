@@ -7,7 +7,7 @@ export interface Props {
     onClick?: () => void;
     closepop?: () => void;
     refreshArtists?: () => void;
-    id?: string;
+    id?: string | number;
     onClose: () => void;
 }
 
