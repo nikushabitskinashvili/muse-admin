@@ -5,20 +5,24 @@ import { useState } from 'react';
 import BaseApi from '@/app/api/baseApi';
 
 const BlockAccount = (props: User) => {
-  const [isBanned, setIsBanned] = useState(props.blocked);
+  const [blocked, setBlocked] = useState(props.blocked);
+
 
   const handleBlockUser = async () => {
-    const newBlockState = !isBanned;
+    const newBlockState = blocked;
+    console.log(newBlockState, "newBlockState");
+
     const apiEndpoint = newBlockState ? `/user/block/${props.id}` : `/user/unblock/${props.id}`;
 
-    try {
-      const response = await BaseApi.put(apiEndpoint);
+    console.log(apiEndpoint, "apiEndpoint" );
 
-      if (response.status === 200) {
-        setIsBanned(newBlockState);
-      }
+    try {
+      const response = await BaseApi.patch(apiEndpoint);
+
+        setBlocked(newBlockState);
+
     } catch (error) {
-      alert(`Could not ${newBlockState ? 'ban' : 'unban'} user!`);
+      throw new Error(`Could not ${newBlockState ? 'block' : 'unblock'} user!`);
     }
   };
 
@@ -27,10 +31,10 @@ const BlockAccount = (props: User) => {
       <form className={styles.form}>
         <div className={styles.texts}>
           <h2 className={styles.text}>
-            {isBanned ? 'Unblock this account?' : 'Block this account?'}
+            {blocked ? 'Unblock this account?' : 'Block this account?'}
           </h2>
           <p>
-            Are you sure you want to {isBanned ? 'unblock' : 'block'} this account?
+            Are you sure you want to {blocked ? 'unblock' : 'block'} this account?
           </p>
         </div>
         <div className={styles.buttons}>
@@ -42,7 +46,7 @@ const BlockAccount = (props: User) => {
           />
           <Button
             bg={'pink'}
-            title={isBanned ? 'Unblock' : 'Block'}
+            title={blocked ? 'Unblock' : 'Block'}
             size={'normal'}
             onClick={handleBlockUser}
           />
