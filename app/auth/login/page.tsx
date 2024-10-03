@@ -2,8 +2,6 @@
 
 import { SetStateAction, useState } from "react";
 import styles from "./loginPage.module.scss";
-import { fakeUsers } from "@/app/data/userData";
-import Link from "next/link";
 import AuthButton from "@/app/Components/AuthButton/AuthButton";
 import AuthInput from "@/app/Components/AuthInput/AuthInput";
 import AuthTitle from "@/app/Components/AuthTitle/AuthTItle";
@@ -29,42 +27,6 @@ export default function Login() {
   }) => {
     setPassword(e.target.value);
     setErrors({ ...errors, password: "" });
-  };
-
-  const validateForm = () => {
-    let valid = true;
-    let errors = { emailOrUsername: "", password: "" };
-
-    if (emailOrUsername.trim() === "") {
-      errors.emailOrUsername = "Email or username cannot be empty";
-      valid = false;
-    }
-
-    if (password.length < 8) {
-      errors.password = "Password must be at least 8 characters long";
-      valid = false;
-    }
-
-    const user = fakeUsers.find(
-      (user) => user.email === emailOrUsername && user.password === password
-    );
-
-    if (!user) {
-      const userWithEmail = fakeUsers.find(
-        (user) => user.email === emailOrUsername
-      );
-
-      if (userWithEmail) {
-        errors.password = "Incorrect password.";
-      } else {
-        errors.emailOrUsername = "User does not exist. Please check your email";
-      }
-
-      valid = false;
-    }
-
-    setErrors(errors);
-    return valid;
   };
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {

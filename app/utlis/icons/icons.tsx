@@ -24,7 +24,7 @@ interface Props {
   color?: keyof typeof colorsEnum;
 }
 
-const Icon: FC<Props> = ({ Icon, size, color, }) => {
+const Icon: FC<Props> = ({ Icon }) => {
   return (<Image src={`/icons/${IconEnum[Icon]}`} width={32} height={32} alt="" />)
 };
 

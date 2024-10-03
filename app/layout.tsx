@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import RecoilWrapper from "./Components/RecoilWrapper/RecoilWrapper";
-import NewSongModal from "./Components/NewSongModal/NewSongModal";
-
 
 const inter = Inter({ subsets: ["latin"] });
 

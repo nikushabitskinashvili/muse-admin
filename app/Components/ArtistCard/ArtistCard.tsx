@@ -13,7 +13,7 @@ const ArtistCard = ({
     className?: string;
     name: string;
 }) => {
-    const [artist, setArtist] = useState<any | null>(null);
+    const [, setArtist] = useState<any | null>(null);
     const searchParams = useSearchParams();
     const id = searchParams.get("id");
 

@@ -5,7 +5,6 @@ import AlbumCard from "@/app/Components/AlbumCard/AlbumCard";
 import { useRef, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import NewAlbumModal from "@/app/Components/NewAlbumModal/NewAlbumModal";
-import NewSongModal from "@/app/Components/NewSongModal/NewSongModal";
 import BaseApi from "@/app/api/baseApi";
 
 interface Album {
@@ -19,8 +18,8 @@ const Page = () => {
     const addPopRef = useRef<HTMLDivElement>(null);
     const [albums, setAlbums] = useState<Album[]>([]);
 
-    let pathname = usePathname()
-    let id = Number(pathname.slice(pathname.lastIndexOf("/") + 1));
+    const pathname = usePathname()
+    const id = Number(pathname.slice(pathname.lastIndexOf("/") + 1));
 
     const toggleAddPop = () => {
         setAddPop(!addPop);
@@ -55,7 +54,7 @@ const Page = () => {
                 <div className={styles.containerWrapper}>
                     <span className={styles.title}>Artist's Albums</span>
                     <div className={styles.btns}>
-                        <Button title="Add Album +" bg="pink" onClick={toggleAddPop} />
+                        <Button title={`Add Album +`} bg="pink" onClick={toggleAddPop} />
                     </div>
                 </div>
 

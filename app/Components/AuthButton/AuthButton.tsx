@@ -3,8 +3,7 @@ import styles from "./AuthButton.module.scss";
 export default function AuthButton({
   buttonTitle,
   bgColor,
-  titleColor,
-  type
+  titleColor
 }: {
   buttonTitle: string;
   bgColor: string;

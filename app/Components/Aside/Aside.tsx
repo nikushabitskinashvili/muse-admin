@@ -12,7 +12,7 @@ const Aside = () => {
     ];
 
 
-    let pathName = usePathname();
+    const pathName = usePathname();
     console.log(pathName);
     
     return (

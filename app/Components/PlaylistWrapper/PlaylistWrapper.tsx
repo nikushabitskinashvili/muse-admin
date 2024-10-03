@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import styles from "@/app/(authorised)/artists/page.module.scss";
 import { PlaylistItem } from "../PlaylistItem/PlaylistItem";
 import BaseApi from "@/app/api/baseApi";

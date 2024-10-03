@@ -1,4 +1,4 @@
-import { Props, User } from '@/app/interface/props.interface';
+import { User } from '@/app/interface/props.interface';
 import { Button } from '../Buttons/Buttons';
 import styles from './BlockAccount.module.scss';
 import { useState } from 'react';

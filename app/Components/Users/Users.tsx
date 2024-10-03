@@ -9,12 +9,11 @@ import { Props, User } from "@/app/interface/props.interface";
 import Link from 'next/link';
 import BaseApi from "@/app/api/baseApi";
 
-const Users = (props: Props) => {
+const Users = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
     const [isBlockAccountModalOpen, setIsBlockAccountModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
     useEffect(() => {
         const fetchUsers = async () => {

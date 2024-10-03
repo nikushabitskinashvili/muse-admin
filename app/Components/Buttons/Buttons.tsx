@@ -1,6 +1,6 @@
 "use client"
 import styles from "./Buttons.module.scss";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { IconEnum } from '@/app/utlis/icons/icons';
 
@@ -19,7 +19,7 @@ interface Props {
 export const Button = (props: Props) => {
 
     const [currentIcon, setCurrentIcon] = useState(props.icon);
-    const [isSmallScreen, setIsSmallScreen] = useState(false)
+    const [isSmallScreen,] = useState(false)
 
 
     const handleMouseOver = () => {

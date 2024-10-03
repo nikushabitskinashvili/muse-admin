@@ -14,8 +14,8 @@ interface Album {
 
 const Albums = () => {
     const [Playlist, setPlaylist] = useState<Album[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [ ,setLoading] = useState(true);
+    const [,setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchAlbums = async () => {
@@ -39,7 +39,7 @@ const Albums = () => {
                     <span>user's playlists</span>
                     <Link href={"/"}>
                         <CloseButton bg={true} onClose={function (): void {
-                            throw new Error('Function not implemented.');
+                            throw new Error("Function not implemented.");
                         } } />
                     </Link>
 

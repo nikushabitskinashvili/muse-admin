@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { albumModal } from '@/app/interface/props.interface';
 import { IconEnum } from '@/app/utlis/icons/icons';
 import Image from 'next/image';
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import BaseApi from '@/app/api/baseApi';
 
 interface NewAlbumModalProps extends albumModal {
@@ -23,15 +23,10 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
         formState: { errors },
     } = useForm<albumModal>();
 
-    const [selectedArtistImage, setSelectedArtistImage] = useState<string | null>(null);
+    const [, setSelectedArtistImage] = useState<string | null>(null);
     const [selectedCoverImage, setSelectedCoverImage] = useState<string | null>(null);
 
-    const handleArtistImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            setSelectedArtistImage(URL.createObjectURL(file));
-        }
-    };
+   
 
     const handleCoverImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -41,8 +36,8 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
     };
 
 
-    let pathname = usePathname()
-    let id = Number(pathname.slice(pathname.lastIndexOf("/") + 1));
+    const pathname = usePathname()
+    const id = Number(pathname.slice(pathname.lastIndexOf("/") + 1));
 
     const onSubmit = async (values: albumModal) => {
         const data = new FormData();

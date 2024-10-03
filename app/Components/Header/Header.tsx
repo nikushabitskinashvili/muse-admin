@@ -2,10 +2,9 @@
 import SearchInput from "./SearchInput/SearchInput";
 import styles from "./Header.module.scss";
 import Image from "next/image";
-import Link from "next/link";
 import { IconEnum } from "@/app/utlis/icons/icons";
 import { handleLogout } from "@/app/scripts/Logout";
-import { redirect, useRouter } from "next/navigation";
+import {useRouter } from "next/navigation";
 
 const Header = () => {
   const router = useRouter();

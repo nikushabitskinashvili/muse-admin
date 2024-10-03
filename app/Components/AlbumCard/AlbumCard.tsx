@@ -13,7 +13,7 @@ const AlbumCard = ({
   className?: string;
   name: string;
 }) => {
-  const [album, setAlbum] = useState<any | null>(null);
+  const [, setAlbum] = useState<any | null>(null);
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const [addPop, setAddPop] = useState(false);

@@ -5,16 +5,14 @@ import CloseButton from "../CloseButton/CloseButton";
 import styles from "./EditPasswordModal.module.scss";
 import { useState } from "react";
 import BaseApi from "@/app/api/baseApi";
+import { log } from "console";
 
 const EditPasswordModal = ({ title, onClose }: Props) => {
     const [newPassword, setNewPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
     const [addPop, setAddPop] = useState(false);
 
-    const toggleAddPop = () => {
-        setAddPop(!addPop);
-    };
-
+    
     const closeAddPop = () => {
         setAddPop(false);
     };
@@ -28,6 +26,8 @@ const EditPasswordModal = ({ title, onClose }: Props) => {
             const response = await BaseApi.patch("/update-password",
                 { password: newPassword },
             );
+            console.log(response);
+            
         } catch (err) {
             alert("Failed to update password. Please try again.");
         }

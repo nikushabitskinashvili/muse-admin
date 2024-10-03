@@ -10,8 +10,8 @@ import BaseApi from "@/app/api/baseApi";
 const SearchInput: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>('');
     const [filteredResults] = useState<string[]>([]);
-    const [users, setUsers] = useState<User[]>([]);
-    const [filteredSongs, setFilteredSongs] = useState<User[]>([]);
+    const [users,] = useState<User[]>([]);
+    const [, setFilteredSongs] = useState<User[]>([]);
 
 
 
