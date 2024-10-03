@@ -18,7 +18,7 @@ const Page = () => {
     const addPopRef = useRef<HTMLDivElement>(null);
     const [albums, setAlbums] = useState<Album[]>([]);
 
-    const pathname = usePathname()
+    const pathname = usePathname();
     const id = Number(pathname.slice(pathname.lastIndexOf("/") + 1));
 
     const toggleAddPop = () => {
@@ -52,9 +52,9 @@ const Page = () => {
         <div className={styles.main}>
             <div className={styles.container}>
                 <div className={styles.containerWrapper}>
-                    <span className={styles.title}>Artist's Albums</span>
+                    <span className={styles.title}>Artist&apos;s Albums</span>
                     <div className={styles.btns}>
-                        <Button title={`Add Album +`} bg="pink" onClick={toggleAddPop} />
+                        <Button title="Add Album +" bg="pink" onClick={toggleAddPop} />
                     </div>
                 </div>
 
@@ -72,13 +72,18 @@ const Page = () => {
             {addPop && (
                 <div className={styles.popBackground} onClick={closeAddPop}>
                     <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
-                        <NewAlbumModal onClose={closeAddPop} refreshArtists={() => { }} title="Add Album" album="" releaseDate={0} artistId={id} />
+                        <NewAlbumModal
+                            onClose={closeAddPop}
+                            refreshArtists={() => {}}
+                            title="Add Album"
+                            album=""
+                            releaseDate={0}
+                            artistId={id}
+                        />
                     </div>
                 </div>
             )}
         </div>
-
-
     );
 };
 

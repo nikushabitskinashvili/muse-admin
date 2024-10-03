@@ -36,7 +36,7 @@ const Albums = () => {
         <main className={styles.main}>
             <div className={styles.mainWrapper}>
                 <div className={styles.albumTxt}>
-                    <span>user's playlists</span>
+                    <span>user&apos;s Albums</span>
                     <Link href={"/"}>
                         <CloseButton bg={true} onClose={function (): void {
                             throw new Error("Function not implemented.");
