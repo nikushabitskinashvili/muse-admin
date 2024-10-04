@@ -16,7 +16,7 @@ const Header = () => {
       <div className={styles.mainWrapper}>
         <div className={styles.container}>
           <Image
-            src={"/Images/logo.png"}
+            src={"/images/logo.png"}
             alt="logo"
             width={112}
             height={44}
