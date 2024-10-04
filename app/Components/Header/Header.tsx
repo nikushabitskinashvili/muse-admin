@@ -23,11 +23,10 @@ const Header = () => {
             width={112}
             height={44}
           ></Image>
-          <SearchInput />
         </div>
 
         <div onClick={logOut} className={styles.logOut}>
-          <Image src={IconEnum.LOGOUT} alt={""} width={32} height={32} />
+          <Image src={'/icons/logOut.svg'} alt={""} width={32} height={32} />
         </div>
       </div>
     </main>
