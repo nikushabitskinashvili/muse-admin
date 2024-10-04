@@ -1,36 +1,25 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import styles from "./ArtistCard.module.scss";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import BaseApi from "@/app/api/baseApi";
+
+
+interface Artist {
+    id: string;
+    name: string;
+    image: string;
+    subTitle: string;
+    albumImg: string;
+}
 
 const ArtistCard = ({
     item
 }: {
-    item: any;
+    item: Artist;
     className?: string;
     name: string;
 }) => {
-    const [artist, setArtist] = useState<any | null>(null);
-    const searchParams = useSearchParams();
-    const id = searchParams.get("id");
 
-    useEffect(() => {
-        const fetchArtistData = async () => {
-            try {
-                const response = await BaseApi.get(`/artist/${id}`);
-                setArtist(response.data);
-            } catch (error) {
-                console.error("Error fetching artist data:", error);
-            }
-        };
-
-        if (id) {
-            fetchArtistData();
-        }
-    }, [id]);
 
     return (
         <Link className={styles.artistCardContainer} href={`/artists/${item.id}`}>

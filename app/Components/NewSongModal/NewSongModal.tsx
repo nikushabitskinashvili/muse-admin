@@ -41,7 +41,7 @@ const NewSongModal = (props: NewSongModalProps) => {
         try {
             await BaseApi.post('/music', data);
             props.refreshSongs();
-            props.onClose();
+            if(props.onClose) props.onClose();
         } catch (error) {
             alert('Could not upload song!');
         }

@@ -8,28 +8,28 @@ export interface Props {
     closepop?: () => void;
     refreshArtists?: () => void;
     id?: string | number;
-    onClose: () => void;
+    onClose?: () => void;
 }
 
 export interface Modal {
     name: string;
-    cover: any;
-    image: any;
+    cover: string;
+    image: string;
     biography: string;
     date?: number;
 }
 
 export interface albumModal {
     title: string;
-    album: any;
+    album: string;
     releaseDate: number;
     artistId: number;
-    onClose?: any;
+    onClose?: () => void;
 }
 
 export interface songModal {
     name: string;
-    music: any;
+    music: string;
     albumId: number;
     onClose?: () => void;
 }

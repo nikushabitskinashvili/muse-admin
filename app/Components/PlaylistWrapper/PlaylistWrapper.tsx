@@ -11,8 +11,8 @@ interface Playlist {
     category: string;
 }
 
- const playlistWrapper = () => {
-    const [Playlists, setPlaylists] = useState<Playlist[]>([]);
+ const PlaylistWrapper = () => {
+    const [playlists, setPlaylists] = useState<Playlist[]>([]);
     const [activeId, setActiveId] = useState<number | null>(null);
 
   
@@ -21,7 +21,7 @@ interface Playlist {
     const handleDelete = async (playlistId: number) => {
         try {
             await BaseApi.delete(`albums/${playlistId}`); 
-            setPlaylists(Playlists.filter(playlist => playlist.id !== playlistId));
+            setPlaylists(playlists.filter(playlist => playlist.id !== playlistId));
         } catch (error) {
             console.error("Failed to delete album.", error);
         }
@@ -30,7 +30,7 @@ interface Playlist {
 
     return (
         <div className={styles.list}>
-            {Playlists.map(playlist => (
+            {playlists.map(playlist => (
                 <PlaylistItem
                     id={playlist.id}
                     activeId={activeId}
@@ -45,4 +45,4 @@ interface Playlist {
     );
 };
 
-export default playlistWrapper;
+export default PlaylistWrapper;
