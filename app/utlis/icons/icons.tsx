@@ -15,7 +15,6 @@ export enum IconEnum {
   COVER = "/icons/cover.svg",
   ALBUMUPLOAD = "/icons/albumUpload.svg",
   SONGUPLOAD = "/icons/songUpload.svg"
-
 }
 
 interface Props {
@@ -25,7 +24,7 @@ interface Props {
 }
 
 const Icon: FC<Props> = ({ Icon }) => {
-  return (<Image src={`/icons/${IconEnum[Icon]}`} width={32} height={32} alt="" />)
+  return ( <Image src={IconEnum[Icon]} width={32} height={32} alt="" />)
 };
 
 export default Icon;
