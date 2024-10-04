@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./AlbumCard.module.scss";
-import { useSearchParams } from "next/navigation";
+import {usePathname, useSearchParams} from "next/navigation";
 import { Button } from "../Buttons/Buttons";
 import NewSongModal from "../NewSongModal/NewSongModal";
 import BaseApi from "@/app/api/baseApi";
@@ -34,6 +34,11 @@ const AlbumCard = ({
     setCurrentAlbumId(albumId);
     setAddPop(!addPop);
   };
+
+
+  const patName = usePathname()
+
+  const artistId = Number(patName.slice(patName.lastIndexOf('/') + 1));
 
   const clickOnPop = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -91,6 +96,7 @@ const AlbumCard = ({
                     onClose={closeAddPop}
                     refreshSongs={() => {}}
                     albumId={currentAlbumId}
+                    artistId={artistId}
                 />
               </div>
             </div>
