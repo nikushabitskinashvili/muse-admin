@@ -50,8 +50,8 @@ const NewArtistModal = (props: NewArtistModalProps) => {
         setSelectedCoverImage(null);
         try {
             await BaseApi.post('/artist', data);
-            props.refreshArtists(); 
-            props.onClose(); 
+            props.refreshArtists();
+            if(props.onClose) props.onClose()
         } catch (error) {
             alert('Could not upload artist!');
         }

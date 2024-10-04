@@ -5,12 +5,11 @@ import CloseButton from "../CloseButton/CloseButton";
 import styles from "./EditPasswordModal.module.scss";
 import { useState } from "react";
 import BaseApi from "@/app/api/baseApi";
-import { log } from "console";
 
 const EditPasswordModal = ({ title, onClose, id }: Props) => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const [addPop, setAddPop] = useState(false);
+  const [, setAddPop] = useState(false);
 
   const closeAddPop = () => {
     setAddPop(false);

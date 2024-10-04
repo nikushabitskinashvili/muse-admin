@@ -7,9 +7,12 @@ import Link from 'next/link';
 import BaseApi from '@/app/api/baseApi';
 
 interface Album {
-    id: string;
+    id: number;
     title: string;
     imageUrl: string;
+    description: string;
+    img: string;
+    subTitle: string
 }
 
 const Albums = () => {

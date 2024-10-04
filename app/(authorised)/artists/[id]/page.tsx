@@ -8,9 +8,13 @@ import NewAlbumModal from "@/app/Components/NewAlbumModal/NewAlbumModal";
 import BaseApi from "@/app/api/baseApi";
 
 interface Album {
-    id: string;
+    id: number;
     title: string;
     src: string;
+    subTitle: string;
+    albumImg: string;
+    description: string;
+    img: string;
 }
 
 const Page = () => {

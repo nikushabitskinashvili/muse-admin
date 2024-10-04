@@ -3,11 +3,19 @@ import styles from "./PlaylistCard.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 
+interface PlaylistCardProps {
+    id: number;
+    title: string;
+    description: string;
+    img: string;
+    subTitle: string;
+}
+
 const PlaylistCard = ({
   item,
   className,
 }: {
-  item: any;
+  item: PlaylistCardProps;
   className?: string;
 }) => {
 

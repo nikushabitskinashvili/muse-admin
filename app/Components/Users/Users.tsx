@@ -5,7 +5,7 @@ import { Table } from "antd";
 import BlockAccount from "@/app/Components/BlockAccount/BlockAccount"; 
 import EditPasswordModal from "@/app/Components/EditPasswordModal/EditPasswordModal";
 import styles from "./Users.module.scss";
-import { Props, User } from "@/app/interface/props.interface";
+import { User } from "@/app/interface/props.interface";
 import Link from 'next/link';
 import BaseApi from "@/app/api/baseApi";
 
@@ -61,7 +61,7 @@ const Users = () => {
             title: "Edit",
             dataIndex: "edit",
             key: "edit",
-            render: (_: any, record: User) => (
+            render: (_: string, record: User) => (
                 <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                     <Image
                         style={{ borderRadius: "4px", background: "#747474", cursor: "pointer" }}

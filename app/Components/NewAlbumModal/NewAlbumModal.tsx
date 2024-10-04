@@ -57,7 +57,8 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
             await BaseApi.post('/album', data);
 
             props.refreshArtists();
-            props.onClose();
+            if(props.onClose) props.onClose();
+
         } catch (error) {
             alert('Could not upload album!');
         }
