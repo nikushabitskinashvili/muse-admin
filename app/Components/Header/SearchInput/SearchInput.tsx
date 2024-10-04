@@ -35,7 +35,7 @@ const SearchInput: React.FC = () => {
     return (
         <div className={styles.wrapper}>
             <div className={inputValue ? styles.inputTyping : styles.container}>
-                <Image src={IconEnum.SEARCH} alt="search" className={styles.searchIcon} width={15} height={15} />
+                <Image src={'/icons/search.svg'} alt="search" className={styles.searchIcon} width={15} height={15} />
                 <input
                     type="text"
                     placeholder="Search"
