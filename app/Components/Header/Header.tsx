@@ -1,8 +1,6 @@
 "use client";
-import SearchInput from "./SearchInput/SearchInput";
 import styles from "./Header.module.scss";
 import Image from "next/image";
-import { IconEnum } from "@/app/utlis/icons/icons";
 import { handleLogout } from "@/app/scripts/Logout";
 import {useRouter } from "next/navigation";
 
