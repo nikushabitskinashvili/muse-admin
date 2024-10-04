@@ -11,6 +11,7 @@ import BaseApi from '@/app/api/baseApi';
 interface NewSongModalProps extends Props {
     refreshSongs: () => void;
     albumId: number | null;
+    artistId: number | null;
 }
 
 const NewSongModal = (props: NewSongModalProps) => {
@@ -35,6 +36,7 @@ const NewSongModal = (props: NewSongModalProps) => {
         data.append("name", values.name);
         data.append("music", values.music[0]);
         data.append("albumId", String(props.albumId));
+        data.append('artistId', String(props.artistId));
 
         reset();
         setSelectedCoverImage(null);
