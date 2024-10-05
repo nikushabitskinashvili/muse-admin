@@ -40,6 +40,7 @@ export interface songModal {
     role: string;
     blocked: boolean; 
     onClose?: () => void;
+    refreshUsers?:()=>void
 }
 
 

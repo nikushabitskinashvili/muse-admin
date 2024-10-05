@@ -8,87 +8,142 @@ import NewAlbumModal from "@/app/Components/NewAlbumModal/NewAlbumModal";
 import BaseApi from "@/app/api/baseApi";
 
 interface Album {
-    id: number;
-    title: string;
-    src: string;
-    subTitle: string;
-    albumImg: string;
-    description: string;
-    img: string;
+  id: number;
+  title: string;
+  src: string;
+  subTitle: string;
+  albumImg: string;
+  description: string;
+  img: string;
+}
+
+interface Music {
+  id: number;
+  name: string;
+  artistId: number;
 }
 
 const Page = () => {
-    const [addPop, setAddPop] = useState(false);
-    const addPopRef = useRef<HTMLDivElement>(null);
-    const [albums, setAlbums] = useState<Album[]>([]);
+  const [addPop, setAddPop] = useState(false);
+  const addPopRef = useRef<HTMLDivElement>(null);
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [musics, setMusics] = useState<Music[]>([]);
 
-    const pathname = usePathname();
-    const id = Number(pathname.slice(pathname.lastIndexOf("/") + 1));
+  console.log(musics);
 
-    const toggleAddPop = () => {
-        setAddPop(!addPop);
-    };
+  const pathname = usePathname();
+  const id = Number(pathname.slice(pathname.lastIndexOf("/") + 1));
 
-    const clickOnPop = (event: React.MouseEvent) => {
-        event.stopPropagation();
-    };
+  const fetchMusic = () => {
+    BaseApi.get("/music")
+      .then((response) => {
+        const filteredData = response.data.filter((item: Music) => {
+          return item.artistId === id;
+        });
+        setMusics(filteredData);
+      })
+      .catch((error) => {
+        console.error("Error fetching music data", error);
+      });
+  };
 
-    const closeAddPop = () => {
-        setAddPop(false);
-    };
+  const deleteMusic = async (id: number) => {
+    BaseApi.delete(`music/${id}`)
+      .then(() => {
+        fetchMusic();
+      })
+      .catch((error) => {
+        console.error("Error deleting item:", error);
+      });
+  };
 
-    useEffect(() => {
-        const fetchAlbums = async () => {
-            try {
-                const response = await BaseApi.get(`/artist/${id}`);
-                setAlbums(response.data.album);
-            } catch (error) {
-                console.error("Error fetching albums:", error);
-            }
-        };
+  useEffect(() => {
+    fetchMusic();
+  }, [id]);
 
-        if (id) {
-            fetchAlbums();
-        }
-    }, [id]);
+  const toggleAddPop = () => {
+    setAddPop(!addPop);
+  };
 
-    return (
-        <div className={styles.main}>
-            <div className={styles.container}>
-                <div className={styles.containerWrapper}>
-                    <span className={styles.title}>Artist&apos;s Albums</span>
-                    <div className={styles.btns}>
-                        <Button title="Add Album +" bg="pink" onClick={toggleAddPop} />
-                    </div>
-                </div>
+  const clickOnPop = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
 
-                <div className={styles.wrapper}>
-                    {albums.length > 0 ? (
-                        albums.map((item) => (
-                            <AlbumCard key={item.id} name={item.title} item={item} />
-                        ))
-                    ) : (
-                        <p className={styles.noAlbum}>No Albums available</p>
-                    )}
-                </div>
-            </div>
+  const closeAddPop = () => {
+    setAddPop(false);
+  };
 
-            {addPop && (
-                <div className={styles.popBackground} onClick={closeAddPop}>
-                    <div ref={addPopRef} onClick={clickOnPop} className={styles.popContainer}>
-                        <NewAlbumModal
-                            onClose={closeAddPop}
-                            refreshArtists={() => {}}
-                            title="Add Album"
-                            album=""
-                            releaseDate={0}
-                            artistId={id}
-                        />
-                    </div>
-                </div>
-            )}
+  const fetchAlbums = async () => {
+    try {
+      const response = await BaseApi.get(`/artist/${id}`);
+      setAlbums(response.data.album);
+    } catch (error) {
+      console.error("Error fetching albums:", error);
+    }
+  };
+  useEffect(() => {
+    if (id) {
+      fetchAlbums();
+    }
+  }, [id]);
+
+  const refreshAlbum = () => {
+    fetchAlbums();
+  };
+
+  return (
+    <div className={styles.main}>
+      <div className={styles.container}>
+        <div className={styles.containerWrapper}>
+          <span className={styles.title}>Artist&apos;s Albums</span>
+          <div className={styles.btns}>
+            <Button title="Add Album +" bg="pink" onClick={toggleAddPop} />
+          </div>
         </div>
-    );
+
+        <div className={styles.wrapper}>
+          {albums.length > 0 ? (
+            albums.map((item) => (
+              <AlbumCard key={item.id} name={item.title} item={item} />
+            ))
+          ) : (
+            <p className={styles.noAlbum}>No Albums available</p>
+          )}
+        </div>
+      </div>
+      <div className={styles.musicList}>
+        {musics.map((music) => (
+          <div
+            key={music.id}
+            className={styles.musicItem}
+            onClick={() => deleteMusic(music.id)}
+          >
+            {music.name}
+          </div>
+        ))}
+      </div>
+
+      {addPop && (
+        <div className={styles.popBackground} onClick={closeAddPop}>
+          <div
+            ref={addPopRef}
+            onClick={clickOnPop}
+            className={styles.popContainer}
+          >
+            <NewAlbumModal
+              onClose={closeAddPop}
+              refreshArtists={() => {}}
+              title="Add Album"
+              album=""
+              releaseDate={0}
+              artistId={id}
+              refreshAlbum={refreshAlbum}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Page;

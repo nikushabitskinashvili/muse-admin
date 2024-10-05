@@ -17,8 +17,10 @@ const BlockAccount = (props: User) => {
     try {
       const response = await BaseApi.patch(apiEndpoint);
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         setIsBanned(newBlockState);
+        if (props.refreshUsers) props.refreshUsers();
+        if (props.onClose) props.onClose();
       }
     } catch (error) {
       alert(`Could not ${newBlockState ? "ban" : "unban"} user!`);
@@ -28,8 +30,6 @@ const BlockAccount = (props: User) => {
   return (
     <div className={styles.container}>
       <div className={styles.form}>
-        {" "}
-        {/* Removed form tag to avoid form submission */}
         <div className={styles.texts}>
           <h2 className={styles.text}>
             {isBanned ? "Unblock this account?" : "Block this account?"}

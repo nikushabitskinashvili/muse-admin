@@ -14,21 +14,22 @@ const Users = () => {
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
     const [isBlockAccountModalOpen, setIsBlockAccountModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const fetchUsers = async () => {
+        try {
+            const response = await BaseApi.get('/user');
+            setUsers(response.data);
+        } catch (error) {
+            alert('Could not fetch users!');
+        }
+    };
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await BaseApi.get('/user');
-                setUsers(response.data);
-            } catch (error) {
-                alert('Could not fetch users!');
-            }
-        };
-
         fetchUsers();
     }, []);
 
-
+    const refreshUsers =()=>{
+        fetchUsers()
+    }
     const openChangePasswordModal = (user: User) => {
         setSelectedUser(user);
         setIsChangePasswordModalOpen(true);
@@ -109,6 +110,7 @@ const Users = () => {
                             email={selectedUser.email}
                             role={selectedUser.role}
                             blocked={selectedUser.blocked}
+                            refreshUsers={refreshUsers}
                         />
                     </div>
                 </div>

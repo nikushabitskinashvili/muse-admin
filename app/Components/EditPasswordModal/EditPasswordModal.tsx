@@ -23,6 +23,9 @@ const EditPasswordModal = ({ title, onClose, id }: Props) => {
       const response = await BaseApi.patch(`/user/${id}`, {
         password: newPassword,
       });
+      if (response.status === 200) {
+        if (onClose) onClose();
+      }
       console.log(response);
     } catch (err) {
       alert("Failed to update password. Please try again.");

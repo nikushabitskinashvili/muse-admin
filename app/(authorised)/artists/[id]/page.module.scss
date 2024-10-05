@@ -68,3 +68,24 @@
     border-radius: 10px;
     position: relative;
 }
+
+// New styles for the music list
+.musicList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; // Adjust gap as needed
+  width: 100%; // Ensures it takes full width of the card
+  padding: 8px 0; // Add some padding for aesthetics
+}
+
+.musicItem {
+  background-color: white; // Use a background color of your choice
+  color: black; // Use a text color of your choice
+  padding: 10px 12px; // Padding for better touch targets
+  border-radius: 8px; // Rounded corners
+  font-size: 14px; // Adjust font size as necessary
+  font-weight: 400; // Adjust font weight as necessary
+  transition: background-color 0.3s ease; // Smooth background transition
+
+ 
+}
