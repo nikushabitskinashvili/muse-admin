@@ -39,7 +39,7 @@ export const PlaylistItem = (props: Props) => {
         <div className={classNames.join(' ').trim()} onClick={onClick}>
             <div className={styles.leftSection}>
                 <div className={styles.text}>
-                    <span>{`${props.title} - ${props.name}`}</span>
+                    <span>{`${props.title}`}</span>
                 </div>
             </div>
             <div className={styles.rightSection}>
