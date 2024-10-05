@@ -50,15 +50,6 @@ const Page = () => {
       });
   };
 
-  const deleteMusic = async (id: number) => {
-    BaseApi.delete(`music/${id}`)
-      .then(() => {
-        fetchMusic();
-      })
-      .catch((error) => {
-        console.error("Error deleting item:", error);
-      });
-  };
 
   useEffect(() => {
     fetchMusic();
