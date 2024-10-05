@@ -1,19 +1,26 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify, decodeJwt } from "jose";
 
 const AUTH_COOKIE_KEY = 'auth';
-
-async function verifyToken(token: string) {
-    const secret = new TextEncoder().encode("daculiparoli");
+function decodeToken(token:string) {
     try {
-        const { payload } = await jwtVerify(token, secret);
-        return payload;
+      const parts = token.split(".");
+      
+      if (parts.length !== 3) {
+        throw new Error("Invalid token format");
+      }
+  
+      const payload = parts[1];
+      
+      const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+      const decodedPayload = JSON.parse(atob(base64));
+      
+      return decodedPayload; 
     } catch (error) {
-        console.error("Invalid token during verification:", error);
-        return null;
+      console.error("Failed to decode token:", error);
+      return null;
     }
-}
+  }
 
 export async function middleware(request: NextRequest) {
     const cookieStore = cookies();
@@ -31,7 +38,7 @@ export async function middleware(request: NextRequest) {
     if (cookie?.value) {
         const token = cookie.value;
 
-        const decodedToken = decodeJwt(token);
+        const decodedToken = decodeToken(token);
         if (decodedToken && decodedToken.role !== "admin") {
             const response = NextResponse.redirect(new URL("/auth/login?error=unAuthorized", request.url));
             response.cookies.set(AUTH_COOKIE_KEY, '', { expires: new Date(0), path: '/' });

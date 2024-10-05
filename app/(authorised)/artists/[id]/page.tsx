@@ -50,6 +50,9 @@ const Page = () => {
       });
   };
 
+  const refreshMusic = () => {
+    fetchMusic();
+  };
 
   useEffect(() => {
     fetchMusic();
@@ -88,7 +91,7 @@ const Page = () => {
   const handleDelete = async (playlistId: number) => {
     try {
       await BaseApi.delete(`albums/${playlistId}`);
-      setPlaylists(playlists.filter(playlist => playlist.id !== playlistId));
+      setPlaylists(playlists.filter((playlist) => playlist.id !== playlistId));
     } catch (error) {
       console.error("Failed to delete album.", error);
     }
@@ -120,7 +123,10 @@ const Page = () => {
             id={music.id}
             key={music.id}
             title={music.name}
-            onDelete={() => handleDelete(music.id)}
+            onDelete={() => {
+              handleDelete(music.id);
+              refreshMusic();
+            }}
           />
         ))}
       </div>
@@ -134,7 +140,7 @@ const Page = () => {
           >
             <NewAlbumModal
               onClose={closeAddPop}
-              refreshArtists={() => { }}
+              refreshArtists={() => {}}
               title="Add Album"
               album=""
               releaseDate={0}
