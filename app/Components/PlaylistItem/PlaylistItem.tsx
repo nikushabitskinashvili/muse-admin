@@ -9,8 +9,6 @@ interface Props {
     name?: string;
     id: number;
     className?: string;
-    setActiveId: (data: number | null) => void;
-    activeId: number | null;
     onDelete: (id: number) => void;
 }
 
@@ -28,9 +26,7 @@ export const PlaylistItem = (props: Props) => {
         };
     }, [props.audioSrc]);
 
-    const isActive = props.activeId === props.id;
     const onClick = () => {
-        isActive ? props.setActiveId(null) : props.setActiveId(props.id);
 
         if (audio) {
             audio.play();
@@ -38,7 +34,6 @@ export const PlaylistItem = (props: Props) => {
     };
 
     const classNames = [styles.playlistItem];
-    if (isActive) classNames.push(styles.active);
 
     return (
         <div className={classNames.join(' ').trim()} onClick={onClick}>

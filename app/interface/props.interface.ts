@@ -43,6 +43,11 @@ export interface songModal {
     refreshUsers?:()=>void
 }
 
+export interface Playlist {
+    id: number;
+    title: string;
+    category: string;
+}
 
 
 

@@ -4,16 +4,11 @@ import {useState } from "react";
 import styles from "@/app/(authorised)/artists/page.module.scss";
 import { PlaylistItem } from "../PlaylistItem/PlaylistItem";
 import BaseApi from "@/app/api/baseApi";
+import { Playlist } from "@/app/interface/props.interface";
 
-interface Playlist {
-    id: number;
-    title: string;
-    category: string;
-}
 
  const PlaylistWrapper = () => {
     const [playlists, setPlaylists] = useState<Playlist[]>([]);
-    const [activeId, setActiveId] = useState<number | null>(null);
 
   
 
@@ -33,8 +28,6 @@ interface Playlist {
             {playlists.map(playlist => (
                 <PlaylistItem
                     id={playlist.id}
-                    activeId={activeId}
-                    setActiveId={setActiveId}
                     key={playlist.id}
                     title={playlist.title}
                     name={playlist.category}

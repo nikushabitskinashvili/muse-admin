@@ -6,6 +6,8 @@ import { useRef, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import NewAlbumModal from "@/app/Components/NewAlbumModal/NewAlbumModal";
 import BaseApi from "@/app/api/baseApi";
+import { Playlist } from "@/app/interface/props.interface";
+import { PlaylistItem } from "@/app/Components/PlaylistItem/PlaylistItem";
 
 interface Album {
   id: number;
@@ -28,6 +30,7 @@ const Page = () => {
   const addPopRef = useRef<HTMLDivElement>(null);
   const [albums, setAlbums] = useState<Album[]>([]);
   const [musics, setMusics] = useState<Music[]>([]);
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   console.log(musics);
 
@@ -91,6 +94,15 @@ const Page = () => {
     fetchAlbums();
   };
 
+  const handleDelete = async (playlistId: number) => {
+    try {
+      await BaseApi.delete(`albums/${playlistId}`);
+      setPlaylists(playlists.filter(playlist => playlist.id !== playlistId));
+    } catch (error) {
+      console.error("Failed to delete album.", error);
+    }
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -113,13 +125,12 @@ const Page = () => {
       </div>
       <div className={styles.musicList}>
         {musics.map((music) => (
-          <div
+          <PlaylistItem
+            id={music.id}
             key={music.id}
-            className={styles.musicItem}
-            onClick={() => deleteMusic(music.id)}
-          >
-            {music.name}
-          </div>
+            title={music.name}
+            onDelete={() => handleDelete(music.id)}
+          />
         ))}
       </div>
 
@@ -132,7 +143,7 @@ const Page = () => {
           >
             <NewAlbumModal
               onClose={closeAddPop}
-              refreshArtists={() => {}}
+              refreshArtists={() => { }}
               title="Add Album"
               album=""
               releaseDate={0}
