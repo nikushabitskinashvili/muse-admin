@@ -110,7 +110,7 @@ const Page = () => {
         <div className={styles.wrapper}>
           {albums.length > 0 ? (
             albums.map((item) => (
-              <AlbumCard key={item.id} name={item.title} item={item} />
+              <AlbumCard refreshMusic={refreshMusic} key={item.id} name={item.title} item={item} />
             ))
           ) : (
             <p className={styles.noAlbum}>No Albums available</p>
