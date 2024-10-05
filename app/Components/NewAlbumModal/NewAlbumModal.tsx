@@ -11,7 +11,6 @@ import { usePathname } from "next/navigation";
 import BaseApi from "@/app/api/baseApi";
 
 interface NewAlbumModalProps extends albumModal {
-  refreshArtists: () => void;
   artistId: number;
   refreshAlbum?: () => void;
 }
@@ -24,7 +23,6 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
     formState: { errors },
   } = useForm<albumModal>();
 
-  const [, setSelectedArtistImage] = useState<string | null>(null);
   const [selectedCoverImage, setSelectedCoverImage] = useState<string | null>(
     null
   );
@@ -45,30 +43,26 @@ const NewAlbumModal = (props: NewAlbumModalProps) => {
     data.append("releaseDate", String(values.releaseDate));
     data.append("album", values.album[0]);
     data.append("artistId", String(id));
-
+    console.log("assssssssss");
     reset();
-    setSelectedArtistImage(null);
     setSelectedCoverImage(null);
-    console.log(data);
 
     try {
       await BaseApi.post("/album", data);
 
       if (props.refreshAlbum) props.refreshAlbum();
+
       if (props.onClose) props.onClose();
     } catch (error) {
       alert("Could not upload album!");
     }
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.head}>
         <span className={styles.title}>{props.title}</span>
-        <CloseButton
-          onClick={props.onClose}
-          bg={true}
-          onClose={props.onClose}
-        />
+        <CloseButton onClick={props.onClose} bg={true} />
       </div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputs}>

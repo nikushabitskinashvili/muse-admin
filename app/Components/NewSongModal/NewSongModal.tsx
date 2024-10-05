@@ -9,9 +9,9 @@ import { IconEnum } from "@/app/utlis/icons/icons";
 import BaseApi from "@/app/api/baseApi";
 
 interface NewSongModalProps extends Props {
-  refreshMusic?: () => void;
   albumId: number | null;
   artistId: number | null;
+  refreshAlbum?: () => void;
 }
 
 const NewSongModal = (props: NewSongModalProps) => {
@@ -44,7 +44,7 @@ const NewSongModal = (props: NewSongModalProps) => {
     setSelectedCoverImage(null);
     try {
       await BaseApi.post("/music", data);
-      if (props.refreshMusic) props.refreshMusic();
+      if (props.refreshAlbum) props.refreshAlbum();
       if (props.onClose) props.onClose();
     } catch (error) {
       alert("Could not upload song!");

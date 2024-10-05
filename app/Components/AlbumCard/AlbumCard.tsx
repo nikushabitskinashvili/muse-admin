@@ -17,12 +17,12 @@ interface Album {
 
 const AlbumCard = ({
   item,
-  refreshMusic,
+  refreshAlbum
 }: {
   item: Album;
   className?: string;
   name: string;
-  refreshMusic?: () => void;
+  refreshAlbum?:()=>void
 }) => {
   const [, setAlbum] = useState<Album | null>(null);
   const searchParams = useSearchParams();
@@ -93,7 +93,7 @@ const AlbumCard = ({
           >
             <NewSongModal
               onClose={closeAddPop}
-              refreshMusic={refreshMusic}
+              refreshAlbum={refreshAlbum}
               albumId={currentAlbumId}
               artistId={artistId}
             />
