@@ -15,7 +15,7 @@ export enum IconEnum {
   COVER = "/icons/cover.svg",
   ALBUMUPLOAD = "/icons/albumUpload.svg",
   SONGUPLOAD = "/icons/songUpload.svg",
-  UNBLOCK = "/icons/unBlock.svg"
+  UNBLOCK = "/icons/unblock.svg"
 }
 
 interface Props {
