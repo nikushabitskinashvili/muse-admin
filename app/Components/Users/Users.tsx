@@ -14,6 +14,7 @@ const Users = () => {
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
     const [isBlockAccountModalOpen, setIsBlockAccountModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
     const fetchUsers = async () => {
         try {
             const response = await BaseApi.get('/user');
@@ -27,9 +28,10 @@ const Users = () => {
         fetchUsers();
     }, []);
 
-    const refreshUsers =()=>{
-        fetchUsers()
+    const refreshUsers = () => {
+        fetchUsers();
     }
+
     const openChangePasswordModal = (user: User) => {
         setSelectedUser(user);
         setIsChangePasswordModalOpen(true);
@@ -73,8 +75,8 @@ const Users = () => {
                         onClick={() => openChangePasswordModal(record)}
                     />
                     <Image
-                        style={{ borderRadius: "4px", background: "#E82567", cursor: "pointer" }}
-                        src="/icons/block.svg"
+                        style={{  borderRadius: "4px", background:record.blocked ? "#1BAE0B" : "#E82567", cursor: "pointer" }}
+                        src={record.blocked ? "/icons/unblock.svg" : "/icons/block.svg"}
                         alt="block Icon"
                         width={24}
                         height={24}
